@@ -3,6 +3,8 @@
 namespace App\Providers\Filament;
 
 use App\Filament\Resources\UserResource\Widgets\ActiveUserChart;
+use App\Filament\Resources\UserResource\Widgets\UserChart;
+use App\Filament\Resources\UserResource\Widgets\UserStatistics;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -37,6 +39,8 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
+                UserStatistics::class,
+                UserChart::class,
             ])
             ->middleware([
                 EncryptCookies::class,
