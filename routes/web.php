@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\HealthRecord\Form;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -14,4 +15,11 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+
+    // Page Health Record
+    Route::prefix('health-records')->group(function () {
+        Route::get('/create',Form::class)->name('health-records.create');
+    });
+
+
 });
