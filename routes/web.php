@@ -1,6 +1,7 @@
 <?php
 
 use App\Livewire\HealthRecord\Form;
+use App\Livewire\HealthRecord\Index;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -18,6 +19,7 @@ Route::middleware([
 
     // Page Health Record
     Route::prefix('health-records')->group(function () {
+        Route::get('/', Index::class)->name('health-records.index');
         Route::get('/create',Form::class)->name('health-records.create');
     });
 

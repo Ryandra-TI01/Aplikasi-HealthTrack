@@ -30,16 +30,7 @@
         
             @error('value') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
         </div>
-        
-        <div class="bg-gray-100 p-2 text-sm">
-            <p>Selected ID: {{ $healthTypeId }}</p>
-            <p>Selected Type: {{ $selectedHealthType->value_type ?? 'Kosong' }}</p>
-            <p>value: {{ $value }}</p>
-            <p>selected health type: {{ $selectedHealthType }}</p>
-        </div>
-        
-        
-
+    
         <div class="mb-4">
             <label for="recordedAt">Tanggal Catatan</label>
             <input type="datetime-local" wire:model="recordedAt" class="w-full border p-2 rounded">
