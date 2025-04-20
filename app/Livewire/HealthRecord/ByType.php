@@ -11,7 +11,7 @@ class ByType extends Component
     public $typeId;
     public $healthType;
     public $records;
-
+    public $showModal = false;
     public function mount($typeId)
     {
         $this->typeId = $typeId;

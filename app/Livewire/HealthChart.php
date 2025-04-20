@@ -3,12 +3,13 @@
 namespace App\Livewire;
 
 use App\Models\HealthRecord;
+use App\Models\HealthType;
 use Livewire\Component;
 
 class HealthChart extends Component
 {
     public $healthTypeId;
-
+    public HealthType $healthType;
     public function mount($healthTypeId)
     {
         $this->healthTypeId = $healthTypeId;

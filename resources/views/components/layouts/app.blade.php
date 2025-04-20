@@ -42,5 +42,6 @@
 
         @livewireScripts
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        @livewireStyles
     </body>
 </html>
