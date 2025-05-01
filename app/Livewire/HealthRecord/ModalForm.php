@@ -50,11 +50,11 @@ class ModalForm extends Component
             'value' => $this->healthType->value_type === 'decimal' ? $this->value : null,
             'raw_value' => $this->healthType->value_type === 'string' ? $this->value : null,
         ]);
-        session()->flash('message', 'Data berhasil disimpan.');
 
-        // $this->dispatch('record-added');        
+        $this->dispatch('notify', type: 'success', message: 'Data Successfully Saved');
+        $this->dispatch('record-added');        
+        session()->flash('message', 'Data berhasil disimpan.');
         $this->reset(['value', 'notes']);
-        return redirect()->route('health-record.by-type', ['typeId' => $this->healthType->id]);
     }
 
     public function render()
