@@ -38,6 +38,7 @@ class Table extends Component
     }
     
     #[On('record-added')] 
+    #[On('record-deleted')]
     public function render()
     {
         $records = HealthRecord::query()
@@ -53,4 +54,30 @@ class Table extends Component
 
         return view('livewire.health-record.table', compact('records'));
     }
+
+    public $deletingId;
+
+    public function confirmDelete($id)
+    {
+        $this->deletingId = $id;
+
+        $this->dispatch('open-delete-confirmation');
+    }
+
+    public function deleteRecord()
+    {
+        $record = HealthRecord::findOrFail($this->deletingId);
+
+        // Optional: validasi agar user hanya bisa hapus record miliknya
+        if ($record->user_id !== auth()->id() && !$this->deletingId ) {
+            abort(403, 'Tidak diizinkan');
+        }
+        
+        $record->delete();
+        $this->deletingId = null;
+        $this->dispatch('record-deleted');        
+        $this->dispatch('scrollToTop');
+        $this->dispatch('notify', type: 'success', message: 'Data berhasil dihapus');
+    }
+
 }

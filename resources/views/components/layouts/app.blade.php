@@ -42,6 +42,12 @@
 
         @livewireScripts
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script>
+            window.addEventListener('scrollToTop', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        </script>
+        
         @livewireStyles
     </body>
 </html>
