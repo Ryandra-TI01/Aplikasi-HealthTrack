@@ -5,6 +5,7 @@ namespace App\Providers\Filament;
 use App\Filament\Resources\UserResource\Widgets\ActiveUserChart;
 use App\Filament\Resources\UserResource\Widgets\UserChart;
 use App\Filament\Resources\UserResource\Widgets\UserStatistics;
+use Filament\FontProviders\GoogleFontProvider;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -31,8 +32,11 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->login()
             ->colors([
-                'primary' => Color::Amber,
+                'primary' => '#1C5B3E',
             ])
+            ->font('Poppins',GoogleFontProvider::class)
+            ->brandLogo(asset('images/LOGO - HealthTrack.png'))
+            ->brandLogoHeight('5rem')
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([
