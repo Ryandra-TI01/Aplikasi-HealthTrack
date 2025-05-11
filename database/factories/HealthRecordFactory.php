@@ -20,7 +20,7 @@ class HealthRecordFactory extends Factory
     {
         return [
             'user_id' => User::factory(),
-            'health_type_id' => HealthType::factory(),
+            'health_type_id' => HealthType::inRandomOrder()->first(),
             'recorded_at' => $this->faker->date(),
             'notes' => $this->faker->sentence(),
             'value' => $this->faker->randomFloat(2, 30, 120),
