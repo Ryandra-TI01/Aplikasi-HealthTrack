@@ -34,8 +34,9 @@ class UserFactory extends Factory
             'two_factor_secret' => null,
             'two_factor_recovery_codes' => null,
             'remember_token' => Str::random(10),
-            'profile_photo_path' => null,
+            'profile_photo_path' => 'https://picsum.photos/seed/' . fake()->uuid() . '/300/300',
             'current_team_id' => null,
+            'created_at' => fake()->dateTimeBetween('-1 year', 'now'),
         ];
     }
 
