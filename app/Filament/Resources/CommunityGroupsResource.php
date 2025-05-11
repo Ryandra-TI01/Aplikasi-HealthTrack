@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\CommunityGroupsResource\Pages;
 use App\Filament\Resources\CommunityGroupsResource\RelationManagers;
+use App\Models\CommunityGroup;
 use App\Models\CommunityGroups;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -15,8 +16,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class CommunityGroupsResource extends Resource
 {
-    protected static ?string $model = CommunityGroups::class;
-
+    protected static ?string $model = CommunityGroup::class;
     protected static ?string $navigationIcon = 'heroicon-o-user-group';
     protected static ?string $navigationGroup = 'User and Community';
     public static function form(Form $form): Form

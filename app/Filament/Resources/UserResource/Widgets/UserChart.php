@@ -8,33 +8,60 @@ use Filament\Widgets\ChartWidget;
 class UserChart extends ChartWidget
 {
     protected static ?string $heading = 'Chart';
-    public ?string $filter = 'today';
+    public ?string $filter = 'year';
     protected int | string | array $columnSpan = 'full';
     protected static ?string $maxHeight = '350px';
     protected function getData(): array
     {
-        $data = User::selectRaw("TO_CHAR(created_at, 'Mon') as bulan, COUNT(*) as total")
-            ->whereYear('created_at', now()->year)
-            ->groupByRaw("TO_CHAR(created_at, 'Mon')")
-            ->orderByRaw("MIN(DATE_TRUNC('month', created_at))")
+        $startDate = now()->startOfYear();
+        $endDate = now()->endOfYear();
+
+        switch ($this->filter) {
+            case 'today':
+                $startDate = now()->startOfDay();
+                $endDate = now()->endOfDay();
+                break;
+            case 'week':
+                $startDate = now()->startOfWeek();
+                $endDate = now()->endOfWeek();
+                break;
+            case 'month':
+                $startDate = now()->startOfMonth();
+                $endDate = now()->endOfMonth();
+                break;
+            case 'year':
+            default:
+                // Sudah diatur sebelumnya
+                break;
+        }
+
+        $data = User::whereBetween('created_at', [$startDate, $endDate])
+            ->selectRaw("DATE_TRUNC('month', created_at) as month, COUNT(*) as total")
+            ->groupBy('month')
+            ->orderBy('month')
             ->get();
 
         return [
             'datasets' => [
                 [
-                    'label' => 'New Users',
+                    'label' => 'Pengguna Baru',
                     'data' => $data->pluck('total'),
-                    'backgroundColor' => '#3b82f6',
+                    'backgroundColor' => 'rgba(45, 128, 90, 0.4)',
+                    'borderColor' => '#2D805A',
+                    'borderWidth' => 2,
+                    'fill' => true,
+                    'tension' => 0.3,
                 ],
             ],
-            'labels' => $data->pluck('bulan'),
+            'labels' => $data->pluck('month')->map(fn($date) => \Carbon\Carbon::parse($date)->format('M')),
         ];
     }
 
     protected function getType(): string
     {
-        return 'line';
+        return 'bar';
     }
+
     protected function getFilters(): ?array
     {
         return [

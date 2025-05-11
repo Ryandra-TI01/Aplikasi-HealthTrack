@@ -50,7 +50,8 @@ class UserResource extends Resource
                 Tables\Columns\TextColumn::make('email_verified_at')
                     ->dateTime()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('profile_photo_path')
+                Tables\Columns\ImageColumn::make('profile_photo_path')
+                    ->rounded()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
