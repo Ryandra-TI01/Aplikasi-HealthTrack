@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\HealthMonitoringController;
+use App\Http\Controllers\HealthMonitoringPdfController;
 use App\Livewire\HealthRecord\ByType;
+use App\Livewire\HealthRecord\Download;
 use App\Livewire\HealthRecord\Form;
 use App\Livewire\HealthRecord\Index;
 use Illuminate\Support\Facades\Route;
@@ -23,6 +26,9 @@ Route::middleware([
         Route::get('/', Index::class)->name('health-records.index');
         Route::get('/type/{typeId}', ByType::class)->name('health-record.by-type');
         Route::get('/create',Form::class)->name('health-records.create');
+        Route::get('/download',Download::class)->name('health-records.download');
+        Route::get('/monitoring/export', [HealthMonitoringPdfController::class, 'export'])->name('monitoring.export');
+
     });
 
 
