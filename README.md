@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://laravel.com" target="_blank">
-    <img src="https://i.imgur.com/7051f3e.png" width="400" alt="Laravel Logo">
+    <img src="https://raw.githubusercontent.com/Ryandra-TI01/Aplikasi-HealthTrack/refs/heads/main/public/images/LOGO%20-%20HealthTrack.png" width="400" alt="Logo HealthTrack">
   </a>
 </p>
 
@@ -38,7 +38,6 @@
 - **Firebase Cloud Messaging** *(untuk notifikasi)*
 - **Laravel DomPDF**
 - **PostgreSQL / MySQL**
-- **Filament Shield** *(opsional untuk manajemen hak akses)*
 
 ---
 
