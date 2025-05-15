@@ -1,6 +1,9 @@
 <div class="p-4">
     <h2 class="text-xl font-bold mb-4">Catatan Kesehatan</h2>
 
+    <x-button>
+        <a href="{{ route('health-records.download') }}">Download PDF</a>
+    </x-button>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
         @foreach($healthTypes as $type)
             <a href="{{ route('health-record.by-type', $type->id) }}">
