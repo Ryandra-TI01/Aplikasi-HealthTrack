@@ -5,12 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Feedback extends Model
+class CommunityGroup extends Model
 {
+    /** @use HasFactory<\Database\Factories\CommunityGroupFactory> */
     use HasFactory;
-    protected $table = 'feedbacks';
+    protected $table = 'community_groups';
     protected $guarded = ['id'];
-    public function user(){
-        return $this->belongsTo(User::class);
-    }
 }

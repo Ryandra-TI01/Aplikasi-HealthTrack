@@ -2,19 +2,19 @@
 
 namespace Database\Seeders;
 
+use App\Models\HealthRecord;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Seeder;
-use Spatie\Permission\Models\Role;
 
-class RoleSeeder extends Seeder
+class HealthRecordSeeder extends Seeder
 {
+    use HasFactory;
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        Role::firstOrCreate(['name' => 'admin', 'guard_name' => 'web']);
-        Role::firstOrCreate(['name' => 'user', 'guard_name' => 'web']);
-
+        HealthRecord::factory(10)->create();
     }
 }

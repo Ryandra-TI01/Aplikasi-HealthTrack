@@ -2,19 +2,18 @@
 
 namespace Database\Seeders;
 
+use App\Models\CommunityGroup;
+use App\Models\CommunityGroups;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Spatie\Permission\Models\Role;
 
-class RoleSeeder extends Seeder
+class CommunityGroupSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        Role::firstOrCreate(['name' => 'admin', 'guard_name' => 'web']);
-        Role::firstOrCreate(['name' => 'user', 'guard_name' => 'web']);
-
+        CommunityGroup::factory(3)->create();
     }
 }

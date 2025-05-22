@@ -74,4 +74,7 @@ class User extends Authenticatable
     public function healthRecords(){
         return $this->hasMany(HealthRecord::class);
     }
+    public function medicalSchedules(){
+        return $this->hasMany(MedicalSchedule::class);
+    }
 }
