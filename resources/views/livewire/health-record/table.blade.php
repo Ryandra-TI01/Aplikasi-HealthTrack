@@ -38,7 +38,13 @@
                             </x-secondary-button>
                             
                             {{-- Component Confirm Delete --}}
-                            <livewire:health-record.confirm-delete :record-id="$record->id" wire:key="delete-{{ $record->id }}"/>
+                            {{-- <livewire:health-record.confirm-delete :record-id="$record->id" wire:key="delete-{{ $record->id }}"/> --}}
+                            <livewire:components.confirm-delete
+                                :record-id="$record->id"
+                                :model-class="\App\Models\HealthRecord::class"
+                                :model-name="'Health Record'"
+                                wire:key="delete-{{ $record->id }}" 
+                            />
 
                         </td>
                     </tr>
