@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\HealthMonitoringController;
 use App\Http\Controllers\HealthMonitoringPdfController;
+use App\Http\Controllers\LandingPageController;
 use App\Livewire\HealthRecord\ByType;
 use App\Livewire\HealthRecord\Download;
 use App\Livewire\HealthRecord\Form;
@@ -9,9 +10,7 @@ use App\Livewire\HealthRecord\Index;
 use App\Livewire\MedicalSchedule\Index as MedicalScheduleIndex;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [LandingPageController::class, 'index'])->name('home');
 
 Route::middleware([
     'auth:sanctum',

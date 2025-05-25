@@ -14,10 +14,15 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                poppins: ['Poppins', 'sans-serif'],
             },
             colors: {
                 'primary': '#2D805A',
+                'secondary-3': '#B1F3B8',
+                'secondary-4':'#5AAC7F',
+            },
+            scrollBehavior: {
+                smooth: 'smooth',
             },
         },
     },
