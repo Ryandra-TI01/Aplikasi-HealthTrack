@@ -12,7 +12,7 @@ class Index extends Component
 {
     public function render()
     {
-        return view('livewire.medical-schedule.index');
+        return view('livewire.medical-schedule.index')->layout('layouts.app');
     }
 
 }

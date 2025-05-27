@@ -23,6 +23,6 @@ class ByType extends Component
     }
     public function render()
     {
-        return view('livewire.health-record.by-type');
+        return view('livewire.health-record.by-type')->layout('layouts.app');
     }
 }
