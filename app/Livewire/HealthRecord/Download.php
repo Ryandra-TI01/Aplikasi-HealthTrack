@@ -45,6 +45,6 @@ class Download extends Component
 
     public function render()
     {
-        return view('livewire.health-record.download');
+        return view('livewire.health-record.download')->layout('layouts.app');
     }
 }

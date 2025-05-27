@@ -17,6 +17,6 @@ class Index extends Component
     }
     public function render()
     {
-        return view('livewire.health-record.index');
+        return view('livewire.health-record.index')->layout('layouts.app');
     }
 }

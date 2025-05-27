@@ -4,6 +4,8 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
+       <!-- Firebase SDK and Initialization -->
+        <script type="module" src="{{asset('firebase-init.js')}}"></script>
 
         <title>{{ config('app.name', 'Laravel') }}</title>
 
@@ -16,24 +18,21 @@
 
         <!-- Styles -->
         @livewireStyles
+        
     </head>
     <body class="font-sans antialiased">
         <x-banner />
 
-        <div class="min-h-screen bg-white">
+        <div class="min-h-screen bg-gray-100">
             @livewire('navigation-menu')
 
             <!-- Page Content -->
-            <main >
-                <div class="pt-28 pb-8">
-                    <div class="max-w-6xl mx-auto sm:px-6 lg:px-12">
-                        {{ $slot }}
-                    </div>
-                </div>
+            <main>
+                {{ $slot }}
             </main>
-            
+
             {{-- @livewire('footer-menu') --}}
-            @include('footer-menu')
+            {{-- @include('footer-menu') --}}
         </div>
 
         @stack('modals')
@@ -45,5 +44,7 @@
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             });
         </script>
+        
+        @livewireStyles
     </body>
 </html>
