@@ -10,7 +10,11 @@
             <a href="#features" class="hover:text-green-700">Features</a>
             <a href="#feedbacks" class="hover:text-green-700">Testimonials</a>
             <x-button >
-                <a href="{{ route('login') }}">Login</a>
+                @if (Auth::check())
+                    <a href="{{ route('dashboard') }}">Dashboard</a>
+                @else
+                    <a href="{{ route('login') }}">Login</a>
+                @endif
             </x-button>
         </nav>
     </div>
