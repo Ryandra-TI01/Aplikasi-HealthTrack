@@ -8,18 +8,18 @@ use App\Livewire\HealthRecord\Download;
 use App\Livewire\HealthRecord\Form;
 use App\Livewire\HealthRecord\Index;
 use App\Livewire\MedicalSchedule\Index as MedicalScheduleIndex;
+use App\Livewire\Home\Index as HomeIndex;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [LandingPageController::class, 'index'])->name('home');
+Route::get('/', [LandingPageController::class, 'index'])->name(name: 'welcome');
 
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', HomeIndex::class)->name('dashboard');
 
     // Page Health Record
     Route::prefix('health-records')->group(function () {
@@ -35,5 +35,23 @@ Route::middleware([
         Route::get('/', MedicalScheduleIndex::class)->name('medical-schedule.index');
     });
 
+});
+use Illuminate\Http\Request;
 
+// routes/web.php
+Route::middleware(['web', 'auth'])->post('/fcm-token', function (Request $request) {
+    $request->validate([
+        'token' => 'required|string',
+    ]);
+
+    $user = Auth::user(); // lebih pasti daripada $request->user()
+
+    if (!$user) {
+        return response()->json(['message' => 'Unauthenticated.'], 401);
+    }
+
+    $user->fcm_token = $request->token;
+    $user->save();
+
+    return response()->json(['message' => 'Token berhasil disimpan.']);
 });

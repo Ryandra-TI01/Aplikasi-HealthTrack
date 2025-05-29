@@ -3,7 +3,7 @@
         <div class="flex justify-between items-center h-20">
             <!-- Logo -->
             <div class="flex-shrink-0">
-                <a href="{{ route('dashboard') }}">
+                <a href="{{ route('welcome') }}">
                     <img class="h-12 w-auto" src="{{ asset('images/LOGO - HealthTrack 1.png') }}" alt="HealthTrack Logo">
                 </a>
             </div>
