@@ -103,7 +103,7 @@
                 console.log('Foreground Message:', payload);
                 new Notification(payload.notification.title, {
                     body: payload.notification.body,
-                    icon: 'https://raw.githubusercontent.com/Ryandra-TI01/Aplikasi-HealthTrack/refs/heads/main/public/images/LOGO%20-%20HealthTrack.png' // Optional: icon notifikasi
+                    icon: 'https://github.com/Ryandra-TI01/Aplikasi-HealthTrack/blob/main/public/images/Logo-HealthTrack-circle.png?raw=true' // Optional: icon notifikasi
                 });
             });
             if ('serviceWorker' in navigator) {
