@@ -45,5 +45,77 @@
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             });
         </script>
+
+        <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-messaging-compat.js"></script>
+
+        <script>
+            const firebaseConfig = {
+                apiKey: "AIzaSyCdgV6kwhRJFWaux8YBjjeaqPNoisA9KjQ",
+                authDomain: "healthtrackapp-be4ec.firebaseapp.com",
+                projectId: "healthtrackapp-be4ec",
+                storageBucket: "healthtrackapp-be4ec.firebasestorage.app",
+                messagingSenderId: "104168353896",
+                appId: "1:104168353896:web:ad5d07b284252b7b1e8bdd",
+                measurementId: "G-7WZR1J8S5Y"
+            };
+
+            firebase.initializeApp(firebaseConfig);
+
+            const messaging = firebase.messaging();
+        </script>
+
+        <script>
+            // VAPID key dari Firebase console (Cloud Messaging tab)
+            const VAPID_KEY = "BJ3M_vfDyD3oBGq5_tBB5hfKfms8mmGv2E6A754aSFZV0ay7ANaVfkM2CeLCL1s8ZrrBgjYlGfM2-4E8uslD1qY";
+
+            // Hanya jalankan jika user login
+            @auth
+            // Minta izin notifikasi
+            Notification.requestPermission().then((permission) => {
+                if (permission === 'granted') {
+                    messaging.getToken({ vapidKey: VAPID_KEY }).then((token) => {
+                        if (token) {
+                            // Kirim token ke backend
+                            fetch('/fcm-token', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'Accept': 'application/json',
+                                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                                },
+                                credentials: 'include',
+                                body: JSON.stringify({ token })
+                            }).then(res => res.json()).then(data => {
+                                console.log('Token berhasil dikirim:', data);
+                            });
+                        }
+                    }).catch((err) => {
+                        console.error('Gagal ambil token:', err);
+                    });
+                } else {
+                    console.log('Izin notifikasi ditolak');
+                }
+            });
+
+            // Tampilkan notifikasi jika ada pesan saat tab aktif
+            messaging.onMessage((payload) => {
+                console.log('Foreground Message:', payload);
+                new Notification(payload.notification.title, {
+                    body: payload.notification.body,
+                    icon: 'https://raw.githubusercontent.com/Ryandra-TI01/Aplikasi-HealthTrack/refs/heads/main/public/images/LOGO%20-%20HealthTrack.png' // Optional: icon notifikasi
+                });
+            });
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('/firebase-messaging-sw.js')
+                    .then(function (registration) {
+                    console.log('Service Worker registered:', registration);
+                    messaging.useServiceWorker(registration);
+                    });
+                }
+
+            @endauth
+        </script>
+
     </body>
 </html>
