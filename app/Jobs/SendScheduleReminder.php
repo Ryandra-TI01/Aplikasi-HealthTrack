@@ -48,7 +48,7 @@ class SendScheduleReminder implements ShouldQueue
                         'notification' => [
                             'title' => 'Pengingat Jadwal',
                             'body' => $schedule->title,
-                            'image' => 'https://raw.githubusercontent.com/Ryandra-TI01/Aplikasi-HealthTrack/refs/heads/main/public/images/LOGO%20-%20HealthTrack.png',
+                            'image' => 'https://github.com/Ryandra-TI01/Aplikasi-HealthTrack/blob/main/public/images/Logo-HealthTrack-circle.png?raw=true',
                             'click_action' => 'http://127.0.0.1:8000/medical-schedule' // <== di sini!
                         ],
                         'data' => [
