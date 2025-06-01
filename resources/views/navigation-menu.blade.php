@@ -19,7 +19,7 @@
             <!-- Right section (Feedback icon + Dropdowns) -->
             <div class="flex items-center space-x-4">
                 <!-- Feedback Icon -->
-                <a href="#" class="text-gray-700 hover:text-primary">
+                <a href="{{ route('support.index') }}" class="text-gray-700 hover:text-primary">
                     <img src="{{ asset('images/feedback.png') }}" alt="">
                 </a>
 

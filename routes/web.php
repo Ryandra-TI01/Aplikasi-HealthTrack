@@ -9,6 +9,7 @@ use App\Livewire\HealthRecord\Form;
 use App\Livewire\HealthRecord\Index;
 use App\Livewire\MedicalSchedule\Index as MedicalScheduleIndex;
 use App\Livewire\Home\Index as HomeIndex;
+use App\Livewire\Support\Index as SupportIndex;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
@@ -31,9 +32,13 @@ Route::middleware([
     });
 
     // Page Medical Schedule
-    route::prefix('medical-schedule')->group(function () {
+    Route::prefix('medical-schedule')->group(function () {
         Route::get('/', MedicalScheduleIndex::class)->name('medical-schedule.index');
     });
+
+    Route::prefix('support')->group(function () { 
+        Route::get('/', SupportIndex::class)->name('support.index');
+    }); 
 
 });
 use Illuminate\Http\Request;
