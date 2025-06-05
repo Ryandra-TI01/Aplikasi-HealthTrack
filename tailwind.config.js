@@ -19,8 +19,11 @@ export default {
             colors: {
                 'primary': '#2D805A',
                 'secondary-1': '#B2DFDB',
+                'secondary-2': '#1C5B3E',
                 'secondary-3': '#B1F3B8',
                 'secondary-4':'#5AAC7F',
+                'error': '#BA0000',
+                'black':'#121212'
             },
             scrollBehavior: {
                 smooth: 'smooth',
