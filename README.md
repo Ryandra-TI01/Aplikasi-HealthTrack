@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://laravel.com" target="_blank">
-    <img src="https://raw.githubusercontent.com/Ryandra-TI01/Aplikasi-HealthTrack/refs/heads/main/public/images/LOGO%20-%20HealthTrack.png" width="400" alt="Logo HealthTrack">
+    <img src="https://github.com/Ryandra-TI01/Aplikasi-HealthTrack/blob/main/public/images/LOGO%20-%20HealthTrack%202.png?raw=true" alt="Logo HealthTrack">
   </a>
 </p>
 
@@ -35,7 +35,7 @@
 - **Filament Admin Panel**
 - **Spatie Activity Log**
 - **z3d0x/filament-logger**
-- **Firebase Cloud Messaging** *(untuk notifikasi)*
+- **Firebase Cloud Messaging** 
 - **Laravel DomPDF**
 - **PostgreSQL / MySQL**
 

@@ -1,11 +1,8 @@
-@if ($errors->any())
-    <div {{ $attributes }}>
-        <div class="font-medium text-red-600">{{ __('Whoops! Something went wrong.') }}</div>
+@props(['field'])
 
-        <ul class="mt-3 list-disc list-inside text-sm text-red-600">
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
+@error($field)
+    <span class="text-red-500 text-sm flex items-center mt-2">
+        <img src="{{asset('images/error.png')}} " alt="error" class="w-4 inline-block mr-1">
+        {{ $message }}
+    </span>
+@enderror
