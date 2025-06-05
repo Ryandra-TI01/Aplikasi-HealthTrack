@@ -5,6 +5,7 @@ namespace App\Providers\Filament;
 use App\Filament\Resources\UserResource\Widgets\ActiveUserChart;
 use App\Filament\Resources\UserResource\Widgets\UserChart;
 use App\Filament\Resources\UserResource\Widgets\UserStatistics;
+use App\Http\Middleware\BlockUserFromAdmin;
 use Filament\FontProviders\GoogleFontProvider;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
@@ -30,7 +31,6 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('admin')
-            ->login()
             ->colors([
                 'primary' => '#1C5B3E',
             ])
@@ -57,6 +57,7 @@ class AdminPanelProvider extends PanelProvider
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
+                BlockUserFromAdmin::class
             ])
             ->authMiddleware([
                 Authenticate::class,
