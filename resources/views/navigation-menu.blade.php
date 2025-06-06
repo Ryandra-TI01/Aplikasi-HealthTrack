@@ -1,4 +1,4 @@
-<nav class="bg-white border-b border-gray-200 shadow-xl fixed w-full top-0 z-50">
+<nav class="bg-white border-b border-gray-200 shadow-md fixed w-full top-0 z-50">
     <div class="max-w-6xl mx-auto pr-4 sm:px-6 ">
         <div class="flex justify-between items-center h-20">
             <!-- Logo -->
@@ -13,7 +13,7 @@
                 <a href="{{ route('dashboard') }}" class="text-sm text-gray-700 hover:text-primary">Home</a>
                 <a href="{{ route('medical-schedule.index') }}" class="text-sm text-gray-700 hover:text-primary">Schedule</a>
                 <a href="{{ route('health-records.index') }}" class="text-sm text-gray-700 hover:text-primary">Health Monitoring</a>
-                <a href="#" class="text-sm text-gray-700 hover:text-primary">Community</a>
+                <a href="{{ route('community.index') }}" class="text-sm text-gray-700 hover:text-primary">Community</a>
             </div>
 
             <!-- Right section (Feedback icon + Dropdowns) -->
@@ -80,6 +80,15 @@
                         <x-slot name="content">
                             <div class="block px-4 py-2 text-xs text-gray-400">Manage Account</div>
                             <x-dropdown-link href="{{ route('profile.show') }}">Profile</x-dropdown-link>
+                            @php
+                                $isAdmin = auth()->check() && auth()->user()->hasRole('admin');
+                                $isInAdminArea = request()->is('admin') || request()->is('admin/*');
+                            @endphp
+                            @if ($isAdmin)
+                                    <x-dropdown-link href="{{ route('filament.admin.pages.dashboard') }}">
+                                        {{ __('Dashboard Admin') }}
+                                    </x-dropdown-link>
+                            @endif
                             @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
                                 <x-dropdown-link href="{{ route('api-tokens.index') }}">API Tokens</x-dropdown-link>
                             @endif

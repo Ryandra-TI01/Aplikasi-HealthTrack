@@ -72,6 +72,11 @@ class AdminPanelProvider extends PanelProvider
                     ->url('user/profile')
                     ->icon('heroicon-s-user-circle')
                 ,
+                MenuItem::make()
+                    ->label('Dashboard User')
+                    ->url('/dashboard')
+                    ->icon('heroicon-s-home')
+                ,
             ])
             ;
     }

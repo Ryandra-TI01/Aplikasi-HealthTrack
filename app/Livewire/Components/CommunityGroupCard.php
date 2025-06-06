@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Livewire\Home\CommunityGroup;
+namespace App\Livewire\Components;
 
 use App\Models\CommunityGroup;
 use Livewire\Component;
 
-class CommunityLink extends Component
+class CommunityGroupCard extends Component
 {
+    public $group;
     public $selectedGroup = null;
 
     public function showGroup($groupId)
@@ -18,10 +19,8 @@ class CommunityLink extends Component
     {
         $this->selectedGroup = null;
     }
-
     public function render()
     {
-        $groups = CommunityGroup::all()->take(5);
-        return view('livewire.home.community-group.community-link', compact('groups'));
+        return view('livewire.components.community-group-card');
     }
 }

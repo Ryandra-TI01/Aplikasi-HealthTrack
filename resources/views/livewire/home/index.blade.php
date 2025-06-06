@@ -22,7 +22,7 @@
 
     <!-- Community Links -->
     <h1 class="text-2xl md:text-2xl font-semibold text-primary mb-4">Your Community</h1>
-    <livewire:home.community-group.community-link/>
+    <livewire:components.community-card/>
 
     <!-- Quick Actions -->
     <h1 class="text-2xl md:text-2xl font-semibold text-primary mb-4">Quick Actions</h1>

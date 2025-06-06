@@ -14,20 +14,7 @@
             </div>
         @endsession
 
-        <form method="POST" action="{{ route('password.email') }}">
-            @csrf
-
-            <div>
-                <x-label for="email" value="{{ __('Email') }}" />
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" autofocus autocomplete="username" placeholder="email@example.com" />
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                <x-button type="submit" variant="primary" :fullWidth="true">
-                    {{ __('Email Password Reset Link') }}
-                </x-button>
-            </div>
-        </form>
+        <livewire:auth.form-forgot-password />
 
         <div class="text-center mt-4 text-sm">
             <a href="{{ route('login') }}" class="text-primary hover:underline">

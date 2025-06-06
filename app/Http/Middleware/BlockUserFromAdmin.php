@@ -20,8 +20,9 @@ class BlockUserFromAdmin
         if (
             $user &&
             $user->hasRole('user') &&
-            $request->is('admin') || $request->is('admin/*')
-        ) {
+            ($request->is('admin') || $request->is('admin/*'))
+        )
+        {
             return redirect('/dashboard')->with('error', 'Kamu tidak punya akses ke halaman admin.');
         }
 

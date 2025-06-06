@@ -1,4 +1,4 @@
-<div class="mb-4 text-center">
+<div class="mb-4 text-center mt-24">
     <h1 class="text-md md:text-xl font-bold text-primary mb-1">
         {{ $title }}
     </h1>
