@@ -80,6 +80,15 @@
                         <x-slot name="content">
                             <div class="block px-4 py-2 text-xs text-gray-400">Manage Account</div>
                             <x-dropdown-link href="{{ route('profile.show') }}">Profile</x-dropdown-link>
+                            @php
+                                $isAdmin = auth()->check() && auth()->user()->hasRole('admin');
+                                $isInAdminArea = request()->is('admin') || request()->is('admin/*');
+                            @endphp
+                            @if ($isAdmin)
+                                    <x-dropdown-link href="{{ route('filament.admin.pages.dashboard') }}">
+                                        {{ __('Dashboard Admin') }}
+                                    </x-dropdown-link>
+                            @endif
                             @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
                                 <x-dropdown-link href="{{ route('api-tokens.index') }}">API Tokens</x-dropdown-link>
                             @endif
