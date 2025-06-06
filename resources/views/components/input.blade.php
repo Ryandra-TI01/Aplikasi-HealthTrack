@@ -8,4 +8,4 @@
         ($errors->has($name) ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : '')
     ]) !!}
 />
-<x-validation-errors field="{{ $name }}" class="mt-2" />
+{{-- <x-validation-errors field="{{ $name }}" class="mt-2" /> --}}
