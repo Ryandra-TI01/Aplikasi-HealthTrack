@@ -45,8 +45,8 @@
             </x-button>
         </div>
     </div>
+    <style>
+        [x-cloak] { display: none; }
+    </style>
 </div>
 
-<style>
-    [x-cloak] { display: none; }
-</style>

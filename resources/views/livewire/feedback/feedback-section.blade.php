@@ -14,7 +14,8 @@
     <div class="max-w-xs pb-8">
         <img src="{{ asset('images/feedback-illustration.png') }}" alt="Feedback Illustration" class="w-full -mb-20 -mt-8">
     </div>
+    
+    {{-- Global feedback form modal (outside main layout for clarity) --}}
+    <livewire:feedback.feedback-form />
 </div>
 
-{{-- Global feedback form modal (outside main layout for clarity) --}}
-<livewire:feedback.feedback-form />
