@@ -37,6 +37,8 @@
         </div>
 
         @stack('modals')
+        {{-- @livewire('components.alert') --}}
+        <livewire:components.alert/>
 
         @livewireScripts
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

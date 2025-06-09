@@ -8,6 +8,6 @@
         <li><a href="{{ route('dashboard') }}" class="hover:underline">Home</a></li>
         <li><a href="{{ route('medical-schedule.index') }}" class="hover:underline">Schedule</a></li>
         <li><a href="{{ route('health-records.index') }}" class="hover:underline">Health Monitoring</a></li>
-        <li><a href="#" class="hover:underline">Community</a></li>
+        <li><a href="{{ route('community.index') }}" class="hover:underline">Community</a></li>
     </ul>
 </footer>

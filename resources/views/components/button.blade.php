@@ -11,6 +11,7 @@ $styles = [
     'primary' => 'bg-primary text-white hover:bg-secondary-4 border-transparent focus:ring-primary',
     'outline' => 'bg-transparent text-primary border-primary hover:bg-primary hover:text-white focus:ring-primary',
     'error' => 'bg-red-600 text-white hover:bg-red-700 border-transparent focus:ring-red-500',
+    'cancel' => 'bg-gray-6/50 text-gray-3 hover:bg-gray-6/20 border-transparent focus:ring-gray-6/50',
 ];
 
 // Tambahkan w-full jika fullWidth true

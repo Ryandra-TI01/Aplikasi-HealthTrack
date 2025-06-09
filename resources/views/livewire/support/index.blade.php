@@ -17,7 +17,7 @@
             textColorTitle="text-secondary-2"
             textColorDescription="text-black"
             buttonVariant="primary"
-            buttonLink="#"
+            buttonLink="{{ route('feedback.index') }}"
             buttonText="Send Feedback"
         />
     

@@ -23,7 +23,9 @@ export default {
                 'secondary-3': '#B1F3B8',
                 'secondary-4':'#5AAC7F',
                 'error': '#BA0000',
-                'black':'#121212'
+                'black':'#121212',
+                'gray-6':'#C7C7CC',
+                'gray-3':'#3A3A3C'
             },
             scrollBehavior: {
                 smooth: 'smooth',
