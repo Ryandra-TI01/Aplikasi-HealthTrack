@@ -7,18 +7,21 @@ use Livewire\Component;
 
 class CommunityGroupCard extends Component
 {
-    public $group;
+public $group;
     public $selectedGroup = null;
+    public $showGroupModal = false;
 
     public function showGroup($groupId)
     {
         $this->selectedGroup = CommunityGroup::find($groupId);
+        $this->showGroupModal = true;
     }
 
     public function closeModal()
     {
-        $this->selectedGroup = null;
+        $this->showGroupModal = false;
     }
+
     public function render()
     {
         return view('livewire.components.community-group-card');

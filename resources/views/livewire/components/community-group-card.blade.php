@@ -1,4 +1,5 @@
 <div>
+    <!-- Card -->
     <div class="bg-primary/10 rounded-xl max-w-44 w-full shadow-md p-6 flex flex-col items-center text-center">
         <img src="{{ str_contains($group->group_link, 'wa.me') 
                         ? asset('images/whatsapp.png') 
@@ -13,10 +14,10 @@
         </x-button>
     </div>
 
-    <!-- Modal -->
-    @if($selectedGroup)
-    <div class="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-        <div class="bg-white rounded-xl shadow-lg px-8 py-12 max-w-sm w-full relative">
+    <!-- Modal with custom component -->
+    <x-modal wire:model="showGroupModal" maxWidth="sm">
+        @if($selectedGroup)
+        <div class="relative px-6 py-8">
             <button class="absolute top-2 right-3 text-gray-600 text-xl" wire:click="closeModal">×</button>
             <div class="text-center">
                 <img src="{{ str_contains($selectedGroup->group_link, 'wa.me') 
@@ -24,7 +25,7 @@
                             : (str_contains($selectedGroup->group_link, 't.me') 
                             ? asset('images/telegram.png') 
                             : asset('images/default.png')) }}" 
-                alt="{{ $selectedGroup->name }}" class="w-24 h-24 mx-auto mb-4">
+                    alt="{{ $selectedGroup->name }}" class="w-24 h-24 mx-auto mb-4">
                 <h3 class="text-xl font-bold mb-1">{{ $selectedGroup->name }}</h3>
                 <p class="text-sm italic mb-2">Group created on {{ \Carbon\Carbon::parse($selectedGroup->created_at)->format('F d, Y') }}</p>
                 <p class="text-sm text-gray-700 mb-4">{{ $selectedGroup->description }}</p>
@@ -35,6 +36,6 @@
                 </x-button>
             </div>
         </div>
-    </div>
-    @endif
+        @endif
+    </x-modal>
 </div>
