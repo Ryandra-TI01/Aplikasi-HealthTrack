@@ -69,7 +69,7 @@ class AdminPanelProvider extends PanelProvider
             ->userMenuItems([
                 MenuItem::make()
                     ->label('Profile')
-                    ->url('user/profile')
+                    ->url('/user/profile')
                     ->icon('heroicon-s-user-circle')
                 ,
                 MenuItem::make()
