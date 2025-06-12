@@ -6,7 +6,7 @@
         placeholder="{{ $placeholder }}"
         {{ $disabled ? 'disabled' : '' }}
         {!! $attributes->merge([
-            'class' => 'border border-gray-300 rounded-lg pl-4 pr-10 py-2 w-full shadow-sm focus:border-primary focus:ring-primary ' .
+            'class' => 'border border-gray-300 rounded-lg pl-4 py-2 w-full shadow-sm focus:border-primary focus:ring-primary ' .
                 ($errors->has($name) ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : '')
         ]) !!}
     />
