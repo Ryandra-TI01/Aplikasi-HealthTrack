@@ -18,4 +18,4 @@
             ? 'border-red-500 focus:ring-red-500'
             : 'border-gray-300 focus:border-primary focus:ring-primary')
     ]) !!}
->{{ old($name, $attributes->get('value')) }}</textarea>
+></textarea>

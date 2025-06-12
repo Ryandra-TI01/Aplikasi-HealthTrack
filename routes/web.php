@@ -11,6 +11,7 @@ use App\Livewire\MedicalSchedule\Index as MedicalScheduleIndex;
 use App\Livewire\Home\Index as HomeIndex;
 use App\Livewire\Support\Index as SupportIndex;
 use App\Livewire\Feedback\Index as FeedbackIndex;
+use App\Livewire\Issue\Index as IssueIndex;
 use App\Livewire\Community\Index as CommunityIndex;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
@@ -43,6 +44,7 @@ Route::middleware([
     Route::prefix('support')->group(function () { 
         Route::get('/', SupportIndex::class)->name('support.index');
         Route::get('/feedback', FeedbackIndex::class)->name('feedback.index');
+        Route::get('/issue', IssueIndex::class)->name('issue.index');
     }); 
 
     Route::prefix('community')->group(function () {

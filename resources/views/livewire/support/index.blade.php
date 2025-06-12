@@ -29,7 +29,7 @@
             textColorTitle="text-error"
             textColorDescription="text-black"
             buttonVariant="error"
-            buttonLink="#"
+            buttonLink="{{ route('issue.index') }}"
             buttonText="Report an Issue"
         />
     </div>
