@@ -6,6 +6,7 @@ use App\Models\HealthRecord;
 use App\Models\HealthType;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class Download extends Component
@@ -15,13 +16,15 @@ class Download extends Component
     public $selectedTypes = [];
     public $healthTypes;
     public $results = [];
+    public bool $hasPreviewed = false;
+    public bool $showModal = false;
+    public bool $selectAll = false;
 
     public function mount()
     {
         $this->healthTypes = HealthType::select('id', 'name')->get();
         $this->endDate = Carbon::now()->format('Y-m-d');
     }
-
     public function showData()
     {
         $this->validate([
@@ -41,6 +44,28 @@ class Download extends Component
 
             $this->results[$typeId] = $records;
         }
+
+        $this->hasPreviewed = true; // 👉 trigger tampilan chart + tabel
+    }
+
+    public function updatedSelectAll($value)
+    {
+        if ($value) {
+            $this->selectedTypes = $this->healthTypes->pluck('id')->map(fn($id) => (string)$id)->toArray();
+        } else {
+            $this->selectedTypes = [];
+        }
+    }
+
+    #[On('showTypeModal')]
+    public function open()
+    {
+        $this->showModal = true;
+    }
+     public function cancel()
+    {
+        $this->selectedTypes = [];
+        $this->showModal = false;
     }
 
     public function render()

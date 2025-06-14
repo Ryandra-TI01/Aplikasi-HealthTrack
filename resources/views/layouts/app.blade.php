@@ -44,6 +44,8 @@
 
         @livewireScripts
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/alpinejs" defer></script>
+
         <script>
             window.addEventListener('scrollToTop', () => {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
