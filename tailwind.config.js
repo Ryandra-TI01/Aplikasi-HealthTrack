@@ -33,5 +33,28 @@ export default {
         },
     },
 
-    plugins: [forms, typography],
+    plugins: [
+        forms, typography,
+        require('@tailwindcss/forms'),
+        function ({ addUtilities }) {
+        addUtilities({
+            '.link-underline': {
+            position: 'relative',
+            },
+            '.link-underline::after': {
+            content: '""',
+            position: 'absolute',
+            left: '0',
+            bottom: '-2px',
+            width: '0%',
+            height: '2px',
+            backgroundColor: '#2D805A',
+            transition: 'width 0.3s ease-in-out',
+            },
+            '.link-underline:hover::after': {
+            width: '100%',
+            },
+        })
+        }
+  ],
 };

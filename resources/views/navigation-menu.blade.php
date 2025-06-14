@@ -10,17 +10,18 @@
 
             <!-- Navigation Links -->
             <div class="hidden lg:flex space-x-10 ml-10">
-                <a href="{{ route('dashboard') }}" class="text-sm text-gray-700 hover:text-primary">Home</a>
-                <a href="{{ route('medical-schedule.index') }}" class="text-sm text-gray-700 hover:text-primary">Schedule</a>
-                <a href="{{ route('health-records.index') }}" class="text-sm text-gray-700 hover:text-primary">Health Monitoring</a>
-                <a href="{{ route('community.index') }}" class="text-sm text-gray-700 hover:text-primary">Community</a>
+                <a href="{{ route('dashboard') }}" class="text-sm text-gray-700 hover:text-primary link-underline">Home</a>
+                <a href="{{ route('medical-schedule.index') }}" class="text-sm text-gray-700 hover:text-primary link-underline">Schedule</a>
+                <a href="{{ route('health-records.index') }}" class="text-sm text-gray-700 hover:text-primary link-underline">Health Monitoring</a>
+                <a href="{{ route('community.index') }}" class="text-sm text-gray-700 hover:text-primary link-underline">Community</a>
             </div>
 
             <!-- Right section (Feedback icon + Dropdowns) -->
             <div class="flex items-center space-x-4">
                 <!-- Feedback Icon -->
-                <a href="{{ route('support.index') }}" class="text-gray-700 hover:text-primary">
-                    <img src="{{ asset('images/feedback.png') }}" alt="">
+                <a href="{{ route('support.index') }}" class="text-gray-500 hover:text-primary  link-underline">
+                    {{-- <img src="{{ asset('images/feedback.png') }}" alt="">` --}}
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M12 15q.425 0 .713-.288T13 14t-.288-.712T12 13t-.712.288T11 14t.288.713T12 15m-1-4h2V5h-2zM2 22V4q0-.825.588-1.412T4 2h16q.825 0 1.413.588T22 4v12q0 .825-.587 1.413T20 18H6zm3.15-6H20V4H4v13.125zM4 16V4z"/></svg>
                 </a>
 
                 <!-- Team Dropdown -->
