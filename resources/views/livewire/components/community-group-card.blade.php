@@ -1,6 +1,6 @@
 <div>
     <!-- Card -->
-    <div class="bg-primary/10 rounded-xl max-w-44 w-full shadow-md p-6 flex flex-col items-center text-center">
+    <div class="bg-primary/10 rounded-xl max-w-44 w-full shadow-md p-6 flex flex-col items-center text-center hover:shadow-xl transform-gpu transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1 group cursor-pointer ">
         <img src="{{ str_contains($group->group_link, 'wa.me') 
                         ? asset('images/whatsapp.png') 
                         : (str_contains($group->group_link, 't.me') 

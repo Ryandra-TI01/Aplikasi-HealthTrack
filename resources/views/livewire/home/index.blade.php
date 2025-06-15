@@ -28,10 +28,7 @@
     <h1 class="text-2xl md:text-2xl font-semibold text-primary mb-4">Quick Actions</h1>
     <section class="mb-16 flex flex-wrap gap-4">
         <x-button class="bg-primary text-white px-4 py-2 rounded shadow">
-            <a href="{{ route('health-records.create') }}">Add Health Data</a>
-        </x-button>
-        <x-button class="bg-primary text-white px-4 py-2 rounded shadow">
-            <a href="{{ route('medical-schedule.index') }}">View Health Data</a>
+            <a href="{{ route('medical-schedule.index') }}">View Schedule</a>
         </x-button>
         <x-button class="bg-primary text-white px-4 py-2 rounded shadow">
             <a href="{{ route('health-records.index') }}">View Health Monitoring</a>

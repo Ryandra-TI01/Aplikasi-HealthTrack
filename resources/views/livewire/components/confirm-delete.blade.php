@@ -44,7 +44,7 @@
             <h2 class="text-lg font-semibold text-primary mb-2">Delete Feedback</h2>
 
             <!-- Message -->
-            <p class="text-gray-700 mb-6">Are you sure you want to permanently delete this feedback?</p>
+            <p class="text-gray-700 mb-6">Are you sure you want to permanently delete this {{ $modelName }}?</p>
 
             <!-- Buttons -->
             <div class="flex justify-end space-x-4">

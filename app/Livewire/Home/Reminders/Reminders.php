@@ -3,8 +3,8 @@
 namespace App\Livewire\Home\Reminders;
 
 use App\Models\MedicalSchedule;
-use Auth;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class Reminders extends Component
@@ -12,23 +12,37 @@ class Reminders extends Component
     public $medicineReminders = [];
     public $appointmentReminders = [];
 
+    public $showModal = false;
+    public $reminderId = null;
+    public $presetDelay = '10'; // default dropdown value
+    public $customDelay = null;
+    public $customDateTime = null;
+
+
     public function mount()
     {
-        $now = Carbon::now();
-        $user = Auth::user();
+        $this->loadReminders();
+    }
 
-        $this->medicineReminders = MedicalSchedule::where('user_id', $user->id)
+    public function loadReminders()
+    {
+        $now = Carbon::now();
+        $userId = Auth::id();
+
+        $this->medicineReminders = MedicalSchedule::query()
+            ->where('user_id', $userId)
             ->where('type', 'medicine')
             ->where('is_completed', false)
-            ->where('reminder_time', '<=', $now)
+            // ->where('reminder_time', '<=', $now)
             ->orderBy('reminder_time')
             ->limit(1)
             ->get();
 
-        $this->appointmentReminders = MedicalSchedule::where('user_id', $user->id)
+        $this->appointmentReminders = MedicalSchedule::query()
+            ->where('user_id', $userId)
             ->where('type', 'appointment')
-            ->where('reminder_time', '<=', $now)
             ->where('is_completed', false)
+            // ->where('reminder_time', '<=', $now)
             ->orderBy('reminder_time')
             ->limit(1)
             ->get();
@@ -37,30 +51,45 @@ class Reminders extends Component
     public function markDone($id)
     {
         $schedule = MedicalSchedule::findOrFail($id);
-        $schedule->is_completed = !$schedule->is_completed;
-        $schedule->save();
+        $schedule->update([
+            'is_completed' => true,
+        ]);
 
-        $this->mount();
-        
+        $this->dispatch('show-alert', [
+            'type' => 'success',
+            'title' => 'Success',
+            'message' => 'Schedule has been completed',
+        ]);
+
+        $this->loadReminders();
     }
 
-    public function remindLater($id)
+    public function openModal($id)
     {
-        // Misalnya tambahkan 10 menit ke reminder
-        $schedule = MedicalSchedule::find($id);
-        if ($schedule) {
-            $schedule->reminder_time = Carbon::parse($schedule->reminder_time)->addMinutes(10);
-            $schedule->save();
-            $this->mount(); // refresh data
-        }
+        $this->reminderId = $id;
+        $this->presetDelay = '10';
+        $this->customDelay = null;
+        $this->showModal = true;
     }
 
-    // public function skipReminder($id)
-    // {
-    //     // Bisa dihapus atau ditandai skip
-    //     MedicalSchedule::where('id', $id)->update(['skipped' => true]);
-    //     $this->mount(); // refresh data
-    // }
+    public function remindLater()
+{
+    $schedule = MedicalSchedule::find($this->reminderId);
+    if (!$schedule) return;
+
+    if ($this->presetDelay === 'custom') {
+        $schedule->reminder_time = Carbon::parse($this->customDateTime);
+    } else {
+        $minutes = (int) $this->presetDelay;
+        $schedule->reminder_time = Carbon::parse($schedule->reminder_time)->addMinutes($minutes);
+    }
+
+    $schedule->save();
+
+    $this->reset(['showModal', 'reminderId', 'presetDelay', 'customDateTime']);
+    $this->loadReminders();
+}
+
 
     public function render()
     {
