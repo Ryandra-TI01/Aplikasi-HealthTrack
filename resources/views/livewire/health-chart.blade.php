@@ -8,12 +8,9 @@
                 data: {
                     labels: @js($labels),
                     datasets: [{
-                        label: 'Nilai Catatan Kesehatan',
+                        label: @js($healthTypeUnit),
                         data: @js($values),
-                        borderColor: 'rgb(59 130 246)', // Tailwind blue-500
-                        backgroundColor: 'rgba(59, 130, 246, 0.2)',
-                        tension: 0.4,
-                        fill: true,
+                        borderColor: '#2D805A',
                         pointRadius: 5
                     }]
                 },
@@ -25,7 +22,7 @@
                         },
                         title: {
                             display: true,
-                            text: 'Grafik Pemantauan Kesehatan'
+                            text: @js($healthTypeName),
                         }
                     }
                 }
@@ -33,7 +30,8 @@
         }
     }"
     x-init="initChart()"
-    class="p-6 bg-white rounded-xl shadow mb-6"
+    class="bg-white rounded-xl shadow p-4 mb-6 border border-primary mx-auto"
+    
 >
-    <canvas id="healthChart" class="w-full h-64"></canvas>
+    <canvas id="healthChart" class=""></canvas>
 </div>
