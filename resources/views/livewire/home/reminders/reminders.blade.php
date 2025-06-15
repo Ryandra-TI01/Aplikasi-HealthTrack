@@ -16,13 +16,13 @@
 
                     <div class="flex gap-2 flex-wrap">
                         <x-button wire:click="markDone({{ $reminder->id }})">Done</x-button>
-                        <x-button variant="outline" wire:click="remindLater({{ $reminder->id }})">Remind me later</x-button>
-                        <livewire:components.confirm-delete
+                        <x-button variant="outline" wire:click="openModal({{ $reminder->id }})">Remind me later</x-button>
+                        {{-- <livewire:components.confirm-delete
                             :record-id="$reminder->id"
                             :model-class="\App\Models\MedicalSchedule::class"
                             :model-name="'reminder'"
                             wire:key="delete-{{ $reminder->id }}"
-                        />
+                        /> --}}
                     </div>
                 </div>
             @endforeach
