@@ -18,7 +18,7 @@
         <p class="text-gray-500 mb-10">Discover how HealthTrack is improving lives every day.</p>
 
         <div class="relative">
-            <div class="swiper mySwiper">
+            <div class="swiper mySwiper cursor-grab">
                 <div class="swiper-wrapper">
                     @foreach ($feedbacks as $feedback)
                         <div class="swiper-slide">
