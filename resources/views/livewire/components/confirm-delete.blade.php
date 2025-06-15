@@ -1,14 +1,30 @@
 <div x-data="{ confirmDelete: @entangle('confirmDelete') }">
     <!-- Tombol Delete -->
-    <x-button 
-        @click="confirmDelete.open = true"
-        wire:loading.class="opacity-50 cursor-not-allowed"
-        wire:loading.attr="disabled"
-        variant="error"
-        >
-        Delete
-        <span wire:loading wire:target="deleteRecord" class="ml-1 animate-spin">⏳</span>
-    </x-button>
+    @if ($icon)
+        <svg 
+            @click="confirmDelete.open = true"
+            wire:loading.class="opacity-50 cursor-not-allowed"
+            wire:loading.attr="disabled"
+            class="cursor-pointer text-error hover:text-error/50" 
+            xmlns="http://www.w3.org/2000/svg" 
+            width="24" 
+            height="24" 
+            viewBox="0 0 24 24">
+            <path fill="currentColor" d="M19 4h-3.5l-1-1h-5l-1 1H5v2h14M6 19a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7H6z"/>
+            <span wire:loading wire:target="deleteRecord" class="ml-1 animate-spin">⏳</span>
+
+        </svg>
+    @else
+        <x-button 
+            @click="confirmDelete.open = true"
+            wire:loading.class="opacity-50 cursor-not-allowed"
+            wire:loading.attr="disabled"
+            variant="error"
+            >
+            Delete
+            <span wire:loading wire:target="deleteRecord" class="ml-1 animate-spin">⏳</span>
+        </x-button>
+    @endif
 
     <!-- Refactored Modal -->
     <x-modal wire:model="confirmDelete.open" maxWidth="md">

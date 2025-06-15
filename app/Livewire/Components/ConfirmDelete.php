@@ -19,6 +19,8 @@ class ConfirmDelete extends Component
     public $confirmDelete = [
         'open' => false,
     ];
+    // custom icon
+    public $icon;
 
     // Initialize the component with required data
     public function mount($recordId, $modelClass, $modelName = 'Record')
