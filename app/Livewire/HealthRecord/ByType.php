@@ -122,6 +122,7 @@ class ByType extends Component
         $this->chartRefreshKey = now()->timestamp; // trigger re-render chart
     }
 
+
     #[On('healthdatatype-deleted')]
     public function loadRecords()
     {

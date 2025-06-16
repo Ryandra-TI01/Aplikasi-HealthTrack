@@ -3,12 +3,14 @@
 namespace App\Livewire\MedicalSchedule;
 
 use App\Models\MedicalSchedule;
+use Livewire\Attributes\Modelable;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
 class ModalForm extends Component
 {
-    public $show = false; 
+    #[Modelable]
+    public $show; 
     public $scheduleId = null;
     public $title = '';
     public $description = '';
@@ -21,10 +23,11 @@ class ModalForm extends Component
     {
         return view('livewire.medical-schedule.modal-form');
     }
-    #[On('open-modal')]
+    #[On('openScheduleForm')]
     public function showModal()
     {
         $this->resetForm();
+        $this->resetValidation();
         $this->show = true;
     }
 
@@ -43,7 +46,7 @@ class ModalForm extends Component
         $this->scheduleId = $schedule->id;
         $this->title = $schedule->title;
         $this->description = $schedule->description;
-        $this->reminder_time = $schedule->reminder_time;
+        $this->reminder_time = \Carbon\Carbon::parse($schedule->reminder_time)->format('Y-m-d\TH:i');
         $this->type = $schedule->type;
         $this->repeat_interval = $schedule->repeat_interval;
         $this->is_completed = $schedule->is_completed;
@@ -68,7 +71,7 @@ class ModalForm extends Component
     {
         $validated = $this->validate([
             'title' => 'required|string|max:255',
-            'type' => 'required|in:medicine,appointment',
+            'type' => 'required|in:medicine,consultation,lab test,therapy and sports',
             'description' => 'nullable|string',
             'reminder_time' => 'required|date',
             'repeat_interval' => 'required|in:none,daily,weekly,monthly',
@@ -79,18 +82,27 @@ class ModalForm extends Component
                 ...$validated,
                 'is_completed' => $this->is_completed,
             ]);
-            $this->dispatch('notify', type: 'success', message: 'Jadwal berhasil diperbarui!');
+            $this->dispatch('show-alert',[
+                'type' => 'success',
+                'message' => 'Thank You',
+                'title' => 'Your schedule has been submitted.'
+            ]);
         } else {
             MedicalSchedule::create([
                 ...$validated,
                 'user_id' => auth()->id(),
                 'is_completed' => $this->is_completed,
             ]);
-            $this->dispatch('notify', type: 'success', message: 'Jadwal berhasil ditambahkan!');
+            $this->dispatch('show-alert',[
+                'type' => 'success',
+                'title' => 'Thank You',
+                'message' => 'Your schedule has been submitted.',
+            ]);
         }
 
         $this->dispatch('medical-schedule-added');
         $this->hideModal();
         $this->resetForm();
     }
+
 }

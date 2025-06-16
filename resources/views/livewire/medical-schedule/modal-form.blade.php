@@ -1,73 +1,70 @@
-<div x-data="{ showModal: $wire.entangle('show').live }">
-    <button 
-        class="bg-blue-500 text-white px-3 py-1 rounded mb-4"
-        x-on:click="$dispatch('open-modal')"
-        >
-        Tambah Jadwal
-    </button>
-
-    <!-- Modal -->
-    <div x-show="showModal" x-cloak class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+<div>
+    <x-modal wire:model="show" title="Tambah Jadwal Medis" maxWidth="md">
         <div class="bg-white p-6 rounded shadow-lg w-full max-w-lg relative">
-
-            <h2 class="text-xl font-semibold mb-4">
-                {{ $scheduleId ? 'Edit Jadwal Medis' : 'Tambah Jadwal Medis' }}
+    
+            <h2 class="text-xl font-semibold mb-4 text-primary text-center">
+                {{ $scheduleId ? 'Edit Your Schedule' : 'Submit Your Schedule' }}
             </h2>
-
+            <p class="text-sm text-center text-gray-600 mt-1 mb-6">
+                {{ $scheduleId ? 'Please update your schedule details clearly to help you stay on track.' : 'Please fill in your schedule details clearly to help you stay on track.' }}
+            </p>
+    
             <form wire:submit.prevent="save" class="space-y-4">
                 <div>
-                    <label class="block text-sm">Judul</label>
-                    <input type="text" wire:model="title" class="w-full border rounded px-2 py-1">
+                    <x-label for="title" class="block text-sm">Title</x-label>
+                    <x-input type="text" wire:model.live="title" class="w-full border rounded px-2 py-1"/>
                     @error('title') <small class="text-red-500">{{ $message }}</small> @enderror
                 </div>
-
+    
                 <div>
-                    <label class="block text-sm">Jenis</label>
-                    <select wire:model.live="type" class="w-full border rounded px-2 py-1">
-                        <option value="">-- Pilih --</option>
-                        <option value="appointment">Appointment</option>
+                    <x-label for="type" class="block text-sm">Schedule Type</x-label>
+                    <x-select wire:model.live="type" class="w-full border rounded px-2 py-1">
+                        <option value="">--  Select Schedule Types --</option>
                         <option value="medicine">Medicine</option>
-                    </select>
+                        <option value="consultation">Consultation</option>
+                        <option value="lab test">Lab Test</option>
+                        <option value="therapy and sports">Therapy and Sports</option>
+                    </x-select>
                     @error('type') <small class="text-red-500">{{ $message }}</small>@enderror
                 </div>
-
+    
                 <div>
-                    <label class="block text-sm">Waktu Pengingat</label>
-                    <input type="datetime-local" wire:model="reminder_time" class="w-full border rounded px-2 py-1">
+                    <x-label for="reminder_time" class="block text-sm">Date Time</x-label>
+                    <x-input type="datetime-local" wire:model.live="reminder_time" class="w-full border rounded px-2 py-1"/>
                     @error('reminder_time') <small class="text-red-500">{{ $message }}</small> @enderror
                 </div>
-
+    
                 <div>
-                    <label class="block text-sm">Keterangan</label>
-                    <textarea wire:model="description" class="w-full border rounded px-2 py-1"></textarea>
+                    <x-label for="description" class="block text-sm">Description</x-label>
+                    <x-textarea wire:model.live="description" class="w-full border rounded px-2 py-1"></x-textarea>
                 </div>
-
+    
                 <div>
-                    <label class="block text-sm">Pengulangan</label>
-                    <select wire:model.live="repeat_interval" class="w-full border rounded px-2 py-1">
-                        <option value="">-- Pilih --</option>
+                    <x-label for="repeat_interval" class="block text-sm">Repeat Interval</x-label>
+                    <x-select wire:model.live="repeat_interval" class="w-full border rounded px-2 py-1">
+                        <option value="">--  Select Repeat Options  --</option>
                         <option value="none">None</option>
                         <option value="daily">Daily</option>
                         <option value="weekly">Weekly</option>
                         <option value="monthly">Monthly</option>
-                    </select>
+                    </x-select>
                     @error('repeat_interval') <small class="text-red-500">{{ $message }}</small> @enderror
                 </div>
-
-                <div class="flex items-center">
-                    <input type="checkbox" wire:model="is_completed" class="mr-2">
-                    <label>Sudah Selesai</label>
-                </div>
-
+    
+                @if ($is_completed == false)            
+                    <div class="flex items-center">
+                        <x-checkbox type="checkbox" wire:model="is_completed" id="is_completed" class="mr-2"/>
+                        <label for="is_completed">Completed</label>
+                    </div>
+                @endif
+    
                 <div class="flex justify-end gap-2">
-                    <button type="submit" class="btn btn-primary">
-                        {{ $scheduleId ? 'Update' : 'Simpan' }}
-                    </button>
+                    <x-button variant="cancel" type="button" wire:click="hideModal">Cancel</x-button>
+                    <x-button type="submit" class="btn btn-primary">
+                        {{ $scheduleId ? 'Update' : 'Submit' }}
+                    </x-button>
                 </div>
             </form>
-
-            <!-- Tombol Tutup -->
-            <button @click="showModal = false" class="absolute top-2 right-2 text-gray-600 hover:text-red-500">✕</button>
         </div>
-    </div>
+    </x-modal>
 </div>
