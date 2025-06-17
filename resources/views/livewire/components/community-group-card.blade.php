@@ -24,7 +24,7 @@
                             ? asset('images/whatsapp.png') 
                             : (str_contains($selectedGroup->group_link, 't.me') 
                             ? asset('images/telegram.png') 
-                            : asset('images/default.png')) }}" 
+                            : asset('images/default-community.png')) }}" 
                     alt="{{ $selectedGroup->name }}" class="w-24 h-24 mx-auto mb-4">
                 <h3 class="text-lg font-semibold text-primary">{{ $selectedGroup->name }}</h3>
                 <small class="text-[12px] font-thin italic text-gray3 mb-2 block">Group created on {{ \Carbon\Carbon::parse($selectedGroup->created_at)->format('F d, Y') }}</small>
