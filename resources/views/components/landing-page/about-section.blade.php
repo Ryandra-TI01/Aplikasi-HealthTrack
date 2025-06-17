@@ -16,10 +16,11 @@
 
         {{-- Text Konten --}}
         <div
-            class="w-full lg:w-1/2 lg:pl-12 text-center mx-4 md:mx-12 lg:mr-48 opacity-0 translate-y-10 transition-all duration-700 delay-200"
+            class="w-full lg:w-1/2 lg:pl-12 mx-4 md:mx-12 lg:mr-48 opacity-0 translate-y-10 transition-all duration-700 delay-200"
             x-data
             x-intersect.once="$el.classList.remove('opacity-0', 'translate-y-10')"
         >
+            <h5 class="text-gray-2 text-sm mb-2">About HealthTrack</h5>
             <h2 class="text-3xl md:text-4xl font-bold text-primary mb-4">
                 Empowering Your<br>Health Journey
             </h2>

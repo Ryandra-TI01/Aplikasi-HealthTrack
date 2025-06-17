@@ -16,8 +16,8 @@
         <div>
             <h4 class="font-semibold mb-2">Supports</h4>
             <ul class="space-y-1">
-                <li><a href="#" class="hover:underline">Give a Feedback</a></li>
-                <li><a href="#" class="hover:underline">Report an Issue</a></li>
+                <li><a href="{{ route('feedback.index') }}" class="hover:underline">Give a Feedback</a></li>
+                <li><a href="{{ route('issue.index') }}" class="hover:underline">Report an Issue</a></li>
             </ul>
         </div>
         <div>
