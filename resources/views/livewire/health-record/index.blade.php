@@ -42,7 +42,7 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                 @forelse($this->filteredHealthTypes as $type)
                     <a href="{{ route('health-record.by-type', $type->id) }}"
-                       class="bg-primary/10 border border-gray-200 rounded-lg p-4 flex flex-col items-center justify-center text-center shadow-md hover:shadow-xl transition">
+                       class="bg-primary/10 border border-gray-200 rounded-lg p-4 flex flex-col items-center justify-center text-center shadow-md hover:shadow-xl transition hover:scale-[1.02] hover:-translate-y-1">
                         <div class="w-10 h-10 mb-3 bg-primary/20 text-primary flex items-center justify-center rounded-full">
                             {{-- Random icon placeholder --}}
                             <x-health-icon />

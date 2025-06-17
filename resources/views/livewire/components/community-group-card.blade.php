@@ -5,7 +5,7 @@
                         ? asset('images/whatsapp.png') 
                         : (str_contains($group->group_link, 't.me') 
                         ? asset('images/telegram.png') 
-                        : asset('images/default.png')) }}" 
+                        : asset('images/default-community.png')) }}" 
             alt="{{ $group->name }}" class="w-12 h-12 object-contain mb-4">
         <h3 class="font-semibold text-sm mb-2 text-primary">{{ $group->name }}</h3>
         <x-button wire:click="showGroup({{ $group->id }})"
@@ -15,7 +15,7 @@
     </div>
 
     <!-- Modal with custom component -->
-    <x-modal wire:model="showGroupModal" maxWidth="sm">
+    <x-modal wire:model="showGroupModal" maxWidth="sm" class="h-full">
         @if($selectedGroup)
         <div class="relative px-6 py-8">
             <button class="absolute top-2 right-3 text-gray-600 text-xl" wire:click="closeModal">×</button>
@@ -26,8 +26,8 @@
                             ? asset('images/telegram.png') 
                             : asset('images/default.png')) }}" 
                     alt="{{ $selectedGroup->name }}" class="w-24 h-24 mx-auto mb-4">
-                <h3 class="text-xl font-bold mb-1">{{ $selectedGroup->name }}</h3>
-                <p class="text-sm italic mb-2">Group created on {{ \Carbon\Carbon::parse($selectedGroup->created_at)->format('F d, Y') }}</p>
+                <h3 class="text-lg font-semibold text-primary">{{ $selectedGroup->name }}</h3>
+                <small class="text-[12px] font-thin italic text-gray3 mb-2 block">Group created on {{ \Carbon\Carbon::parse($selectedGroup->created_at)->format('F d, Y') }}</small>
                 <p class="text-sm text-gray-700 mb-4">{{ $selectedGroup->description }}</p>
                 <x-button>
                     <a href="{{ $selectedGroup->group_link }}" target="_blank">

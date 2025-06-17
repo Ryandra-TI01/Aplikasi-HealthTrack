@@ -36,7 +36,7 @@
             </div>
 
             {{-- Actions --}}
-            <div class="flex justify-between gap-4">
+            <div class="flex justify-end gap-4">
                 <x-button type="button"
                           wire:click="cancel"
                           variant="cancel">

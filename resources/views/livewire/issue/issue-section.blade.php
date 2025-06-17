@@ -31,7 +31,7 @@
             <tbody class="">
                 @forelse ($issues as $issue)
                     <tr
-                        class="{{ $loop->index % 2 === 0 ? 'bg-white' : 'bg-primary/5' }} hover:bg-gray-50 cursor-pointer transition"
+                        class="{{ $loop->index % 2 === 0 ? 'bg-white' : 'bg-primary/5' }} hover:bg-gray-200 cursor-pointer transition"
                         wire:click="show({{ $issue->id }})"
                     >
                         <td class="px-6 py-4">{{ $issue->title }}</td>
@@ -91,7 +91,7 @@
                     @error('description') <span class="text-red-500">{{ $message }}</span> @enderror
                 </div>
 
-                <div class="flex justify-between gap-2 pt-2">
+                <div class="flex justify-end gap-2 pt-2">
                     <x-button variant="cancel" type="button" wire:click="closeModal">Cancel</x-button>
                     <x-button variant="primary" type="submit">Submit</x-button>
                 </div>
