@@ -4,8 +4,10 @@
         {{-- Ilustrasi Stetoskop --}}
         <div
             class="w-full lg:w-1/2 mb-10 lg:mb-0 relative opacity-0 translate-y-10 transition-all duration-700"
-            x-data
-            x-intersect.once="$el.classList.remove('opacity-0', 'translate-y-10')"
+            {{-- x-data
+            x-intersect.once="$el.classList.remove('opacity-0', 'translate-y-10')" --}}
+            data-aos="fade-right"
+            data-aos-delay="200"
         >
             <img 
                 src="{{ asset('images/Stethoscope with checklist.png') }}"
@@ -35,6 +37,8 @@
     {{-- Dot kanan atas dengan parallax efek --}}
     <div
         class="absolute top-6 right-6 lg:top-8 lg:right-16 z-0"
+        data-aos="fade-left"
+        data-aos-delay="200"
         x-data="{ scrollY: 0 }"
         x-init="window.addEventListener('scroll', () => scrollY = window.scrollY)"
         :style="'transform: translateY(' + (scrollY * 0.05) + 'px)'"
