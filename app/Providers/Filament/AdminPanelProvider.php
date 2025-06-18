@@ -12,6 +12,7 @@ use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Filament\Navigation\MenuItem;
+use Filament\Navigation\NavigationItem;
 use Filament\Pages;
 use Filament\Panel;
 use Filament\PanelProvider;
@@ -78,6 +79,12 @@ class AdminPanelProvider extends PanelProvider
                     ->icon('heroicon-s-home')
                 ,
             ])
-            ;
+            ->navigationItems([
+            NavigationItem::make('Analytics Pulse')
+                ->url('/pulse', shouldOpenInNewTab: true)
+                ->icon('heroicon-o-chart-bar')
+                ->group('Analytics'),
+                // ->sort(3),
+        ]);
     }
 }
