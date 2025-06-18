@@ -14,7 +14,7 @@
                 <option value="oldest">Sort by Oldest</option>
             </x-select>
         </div>
-        <x-button wire:click="openModal">Add Data</x-button>
+        <x-button wire:click="openModal">Add Issue</x-button>
     </div>
 
     {{-- Table --}}
