@@ -44,10 +44,10 @@
 
             {{-- Modal --}}
             <x-modal wire:model="showModal"  maxWidth="md">
-                <div class="p-6 w-full">
+                <div class="p-6 w-full overflow-y-auto max-h-[90vh]">
                     <h2 class="text-primary text-center font-medium mb-6">-- Select Data Type --</h2>
                     
-                    <div class="space-y-2 max-h-60">
+                    <div class="space-y-2">
                         <div class="mb-4">
                             <x-label class="flex items-center gap-2" for="selectAll">
                                 <x-checkbox type="checkbox" wire:model.live="selectAll" id="selectAll" />
