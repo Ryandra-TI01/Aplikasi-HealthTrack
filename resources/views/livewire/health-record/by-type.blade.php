@@ -22,7 +22,7 @@
         @endif
 
         {{-- Top bar --}}
-        <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-6">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-6 p-2 sm:p-0">
             <div class="flex gap-3">
                 <div class="flex-1">
                     <x-input type="text" icon placeholder="Search" wire:model.live="search"
@@ -122,26 +122,35 @@
            
 
         {{-- Table --}}
-        <div class="overflow-auto rounded-xl shadow">
-            <table class="w-full text-sm text-left">
-                <thead class="bg-primary text-white">
-                    <tr>
-                        <th class="px-4 py-3">Date</th>
-                        <th class="px-4 py-3">Time</th>
-                        <th class="px-4 py-3">Value</th>
-                        <th class="px-4 py-3">Notes</th>
-                        <th class="px-4 py-3">Actions</th>
-                    </tr>
-                </thead>
-                <tbody class="bg-white divide-y">
-                    @forelse ($records as $record)
-                        <tr wire:key="record-{{ $record->id }}">
-                            <td class="px-4 py-3">{{ \Carbon\Carbon::parse($record->recorded_at)->format('d M Y') }}</td>
-                            <td class="px-4 py-3">{{ \Carbon\Carbon::parse($record->recorded_at)->format('h:i A') }}</td>
-                            <td class="px-4 py-3">{{ $record->value }} {{ $healthType->unit }}</td>
-                            <td class="px-4 py-3">{{ $record->notes ?: '-' }}</td>
-                            <td class="px-4 py-3 flex gap-2">
-                                {{-- Edit/Delete buttons --}}
+<div class="w-full overflow-x-auto sm:rounded-xl sm:shadow">
+    <table class="min-w-full text-sm text-left">
+        <thead class="bg-primary text-white">
+            <tr>
+                <th class="px-4 py-3 whitespace-nowrap">Date</th>
+                <th class="px-4 py-3 whitespace-nowrap">Time</th>
+                <th class="px-4 py-3 whitespace-nowrap">Value</th>
+                <th class="px-4 py-3 whitespace-nowrap">Notes</th>
+                <th class="px-4 py-3 whitespace-nowrap">Actions</th>
+            </tr>
+        </thead>
+        <tbody class="bg-white divide-y">
+            @forelse ($records as $record)
+                <tr wire:key="record-{{ $record->id }}">
+                    <td class="px-4 py-3 whitespace-nowrap">
+                        {{ \Carbon\Carbon::parse($record->recorded_at)->format('d M Y') }}
+                    </td>
+                    <td class="px-4 py-3 whitespace-nowrap">
+                        {{ \Carbon\Carbon::parse($record->recorded_at)->format('h:i A') }}
+                    </td>
+                    <td class="px-4 py-3 whitespace-nowrap">
+                        {{ $record->value }} {{ $healthType->unit }}
+                    </td>
+                    <td class="px-4 py-3 whitespace-nowrap">
+                        {{ $record->notes ?: '-' }}
+                    </td>
+                    <td class="px-4 py-3 whitespace-nowrap">
+                        <div class="flex items-center gap-2">
+                           {{-- Edit/Delete buttons --}}
                                 <button class="text-primary hover:text-primary/50" wire:click="edit({{ $record->id }})"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></g></svg></button>
                                 <livewire:components.confirm-delete
                                     :record-id="$record->id"
@@ -150,16 +159,18 @@
                                     wire:key="delete-{{$record->id}}"
                                     icon
                                 />
-                            </td>
-                        </tr>
-                    @empty
-                        <tr>
-                            <td colspan="5" class="text-center px-4 py-6 text-gray-500">No health records found.</td>
-                        </tr>
-                    @endforelse
-                </tbody>
-            </table>
-        </div>            
+                        </div>
+                    </td>
+                </tr>
+            @empty
+                <tr>
+                    <td colspan="5" class="text-center px-4 py-6 text-gray-500">No health records found.</td>
+                </tr>
+            @endforelse
+        </tbody>
+    </table>
+</div>
+         
         
     
     <livewire:components.footer-note 

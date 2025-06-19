@@ -1,7 +1,7 @@
 <div class="space-y-6">
     {{-- Search, Sort, Add --}}
-    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-        <div class="flex items-center gap-2 w-full md:w-auto">
+    <div class="flex flex-col md:flex-row items-center sm:justify-between gap-4 p-2 sm:p-0">
+        <div class="flex items-center gap-2 md:w-auto">
             <x-input
                 type="text"
                 wire:model.live="search"
@@ -18,7 +18,7 @@
     </div>
 
     {{-- Table --}}
-    <div class="overflow-x-auto rounded-lg shadow">
+    <div class="overflow-x-auto sm:rounded-lg sm:shadow">
         <table class="min-w-full divide-y divide-gray-200 text-sm">
             <thead class="bg-primary text-white">
                 <tr>

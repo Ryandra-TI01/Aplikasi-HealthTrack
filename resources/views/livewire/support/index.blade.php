@@ -8,7 +8,7 @@
         description="Were always working to improve your experience. Let us know how we’re doing or if something is not working quite right." 
     />
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-md md:max-w-2xl mx-auto mb-24">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-md md:max-w-2xl mx-auto mb-24 p-4 sm:p-0">
         <livewire:support.support-card 
             title="Tell Us What You Think!" 
             description="Help us enhance your experience." 

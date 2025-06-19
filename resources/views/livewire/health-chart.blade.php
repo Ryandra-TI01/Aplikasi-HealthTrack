@@ -30,7 +30,7 @@
         }
     }"
     x-init="initChart()"
-    class="bg-white rounded-xl shadow p-4 mb-6 border border-primary mx-auto"
+    class="bg-white sm:rounded-xl sm:shadow sm:p-4 mb-6 border border-primary mx-auto"
     
 >
     <canvas id="healthChart" class=""></canvas>

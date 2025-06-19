@@ -1,4 +1,4 @@
-<div>
+<div class="mx-4 sm:mx-0">
     @if ($medicineReminders->count() > 0 || $appointmentReminders->count() > 0)
         <section class="mb-10 grid grid-cols-1 md:grid-cols-2 gap-6">
 
@@ -46,7 +46,7 @@
 
         </section>
     @else
-        <div class="bg-primary/10 shadow-md rounded-xl p-4 text-center mb-10">No reminders found</div>
+        <div class="bg-primary/10 text-primary shadow-md rounded-xl p-4 text-center mb-10">No reminders found</div>
     @endif
     <x-modal wire:model="showModal" maxWidth="md">
         <div class="bg-white p-6 w-full">
@@ -66,7 +66,7 @@
                 <x-label for="customDateTime" class="block text-sm mb-1">Pick date and time:</x-label>
                 <x-input 
                     type="datetime-local" 
-                    wire:model="customDateTime" 
+                    wire:model.live="customDateTime" 
                     id="customDateTime"
                     class="form-input w-full mb-4"
                 />

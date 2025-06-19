@@ -1,4 +1,4 @@
-<nav class="text-sm text-gray-500 mb-6">
+<nav class="text-[12px] sm:text-sm text-gray-500 mb-6 ms-4 sm:ms-0">
     <ol class="list-reset flex items-center space-x-2">
         <li class="flex items-center">
             <img src="{{ asset('images/home.png') }}" class="h-4 mr-2" alt="home">

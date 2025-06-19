@@ -9,7 +9,7 @@
     />
 
     {{-- toggle view --}}
-    <div class="inline-flex items-center rounded-lg overflow-hidden border border-gray-300 shadow-sm mb-4">
+    <div class="inline-flex items-center rounded-lg overflow-hidden border border-gray-300 shadow-sm mb-4 ms-4 sm:ms-0">
         {{-- List Button --}}
         <button wire:click="setView('list')"
             class="flex items-center gap-1 px-4 py-2 transition-all duration-150
@@ -33,11 +33,13 @@
     </div>
 
     @if($viewMode === 'calendar')
-        <div class="bg-white rounded-xl shadow-md p-4 border">
+        <div class="bg-white rounded-none border-none sm:rounded-xl sm:shadow-md p-4 sm:border">
             <livewire:medical-schedule.schedule-calendar />
         </div>
     @else
-        <div class="bg-white rounded-xl shadow-md p-4 border">
+        <div class="bg-white rounded-none sm:rounded-xl sm:shadow-md p-4 sm:border">
+                    {{-- <div class="bg-white rounded-xl shadow-md p-4 border"> --}}
+
             {{-- Top bar --}}
             <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-6">
                 <x-input type="text" wire:model.live="search" icon :placeholder="__('Search')" />

@@ -13,7 +13,7 @@
     />
 
     {{-- Filter Card --}}
-    <div class="bg-white shadow-md rounded-xl p-6 mt-6">
+    <div class="bg-white sm:border sm:shadow-md sm:rounded-xl p-6 mt-6">
         <form action="{{ route('monitoring.export') }}" method="GET" class="grid gap-4">
             {{-- Row 1 --}}
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -43,7 +43,7 @@
             </div>
 
             {{-- Modal --}}
-            <x-modal wire:model="showModal"  maxWidth="md">
+            <x-modal wire:model="showModal"  maxWidth="lg">
                 <div class="p-6 w-full overflow-y-auto max-h-[90vh]">
                     <h2 class="text-primary text-center font-medium mb-6">-- Select Data Type --</h2>
                     
@@ -98,7 +98,7 @@
             @endphp
 
             <div class="mt-10">
-                <h3 class="text-lg font-semibold text-primary mb-4">Preview {{ $type->name }} Data</h3>
+                <h3 class="text-lg font-semibold text-primary mb-4 ms-4 sm:ms-0">Preview {{ $type->name }} Data</h3>
 
                 {{-- Chart --}}
                 @if ($records->isNotEmpty())
@@ -144,7 +144,7 @@
                             }
                         }"
                         x-init="initChart()"
-                        class="bg-white rounded-xl shadow p-4 mb-6 border border-primary"
+                        class="bg-white sm:rounded-xl sm:shadow sm:p-4 mb-6 sm:border border-primary"
                         wire:ignore
                     >
                         <canvas id="chart-{{ $typeId }}" class="w-full h-64"></canvas>
@@ -152,43 +152,45 @@
                 @endif
 
                 {{-- Table --}}
-                <div class="bg-white shadow rounded-xl overflow-x-auto">
+                <div class="bg-white shadow sm:rounded-xl w-full overflow-x-auto">
                     <table class="min-w-full divide-y divide-gray-200">
                         <thead class="bg-primary text-white">
                             <tr>
-                                <th class="px-6 py-3 text-left text-xs font-medium uppercase">Date</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium uppercase">Time</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium uppercase">Value</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium uppercase">Notes</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium uppercase">Actions</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium uppercase whitespace-nowrap">Date</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium uppercase whitespace-nowrap">Time</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium uppercase whitespace-nowrap">Value</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium uppercase whitespace-nowrap">Notes</th>
+                                {{-- <th class="px-6 py-3 text-left text-xs font-medium uppercase whitespace-nowrap">Actions</th> --}}
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-100">
                             @if ($records->isEmpty())
                                 <tr>
-                                    <td colspan="5" class="px-auto py-6 text-center text-gray-500">No data found.</td>
+                                    <td colspan="5" class="px-6 py-6 text-center text-gray-500">No data found.</td>
                                 </tr>
                             @endif
+
                             @foreach ($records as $record)
                                 <tr>
-                                    <td class="px-6 py-4">{{ \Carbon\Carbon::parse($record->recorded_at)->format('d M Y') }}</td>
-                                    <td class="px-6 py-4">{{ \Carbon\Carbon::parse($record->recorded_at)->format('h:i A') }}</td>
-                                    <td class="px-6 py-4">{{ $record->value ?? $record->raw_value }} {{ $type->unit }}</td>
-                                    <td class="px-6 py-4">{{ $record->notes ?? '-' }}</td>
-                                    <td class="px-6 py-4">
+                                    <td class="px-6 py-4 whitespace-nowrap">{{ \Carbon\Carbon::parse($record->recorded_at)->format('d M Y') }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">{{ \Carbon\Carbon::parse($record->recorded_at)->format('h:i A') }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">{{ $record->value ?? $record->raw_value }} {{ $type->unit }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">{{ $record->notes ?? '-' }}</td>
+                                    {{-- <td class="px-6 py-4 whitespace-nowrap">
                                         <button class="text-red-500 hover:text-red-700">
                                             <i class="fas fa-trash"></i>
                                         </button>
-                                    </td>
+                                    </td> --}}
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
                 </div>
+
             </div>
         @endforeach
     @else
-        <p class="text-gray-500 text-sm mt-6">Please select health data and date range, then click Preview.</p>
+        <p class="text-gray-500 text-sm mt-6 p-4 sm:p-0">Please select health data and date range, then click Preview.</p>
     @endif
 
     {{-- Footer note with a thank you message to users --}}

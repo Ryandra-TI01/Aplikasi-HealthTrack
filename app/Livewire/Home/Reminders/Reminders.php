@@ -31,7 +31,7 @@ class Reminders extends Component
 
         $this->medicineReminders = MedicalSchedule::query()
             ->where('user_id', $userId)
-            ->where('type', 'medicine')
+            // ->where('type', 'medicine')
             ->where('is_completed', false)
             // ->where('reminder_time', '<=', $now)
             ->orderBy('reminder_time')
@@ -40,7 +40,7 @@ class Reminders extends Component
 
         $this->appointmentReminders = MedicalSchedule::query()
             ->where('user_id', $userId)
-            ->where('type', 'appointment')
+            // ->where('type', 'appointment')
             ->where('is_completed', false)
             // ->where('reminder_time', '<=', $now)
             ->orderBy('reminder_time')
@@ -73,12 +73,13 @@ class Reminders extends Component
     }
 
     public function remindLater()
-{
+    {
     $schedule = MedicalSchedule::find($this->reminderId);
     if (!$schedule) return;
 
     if ($this->presetDelay === 'custom') {
-        $schedule->reminder_time = Carbon::parse($this->customDateTime);
+        // $schedule->reminder_time = Carbon::parse($this->customDateTime)->format('Y-m-d\TH:i');
+        $this->customDateTime = Carbon::parse($schedule->reminder_time)->format('Y-m-d\TH:i');
     } else {
         $minutes = (int) $this->presetDelay;
         $schedule->reminder_time = Carbon::parse($schedule->reminder_time)->addMinutes($minutes);

@@ -34,7 +34,7 @@
         </div>
 
         {{-- Health Types --}}
-        <div class="bg-white shadow-md rounded-xl p-6 border border-gray-200">
+        <div class="bg-white sm:shadow-md sm:rounded-xl p-6 sm:border border-gray-200">
             <h3 class="text-lg font-semibold mb-4 text-center text-primary border-b border-primary pb-2">
                 Types of Health Data
             </h3>
