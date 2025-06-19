@@ -14,7 +14,7 @@
             x-transition:leave="transition ease-in duration-100"
             x-transition:leave-start="opacity-100 scale-100"
             x-transition:leave-end="opacity-0 scale-95"
-            class="w-full max-w-sm rounded-xl p-6 shadow-lg text-center bg-white"
+            class="w-[60%] sm:w-full max-w-sm rounded-xl p-4 sm:p-6 shadow-lg text-center bg-white"
         >
             <!-- Icon -->
             <div class="mb-4">
