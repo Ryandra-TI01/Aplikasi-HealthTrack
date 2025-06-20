@@ -23,11 +23,16 @@ class ScheduleList extends Component
 
         if ($this->search) {
             $query->where(function ($q) {
-                $q->where('title', 'like', '%' . $this->search . '%')
-                  ->orWhere('type', 'like', '%' . $this->search . '%');
-                //   ->orWhereDate('reminder_time', $this->search);
+                $q->where('title', 'ilike', '%' . $this->search . '%')
+                ->orWhere('type', 'ilike', '%' . $this->search . '%');
+
+                if (strtotime($this->search)) {
+                    $date = date('Y-m-d', strtotime($this->search));
+                    $q->orWhereDate('reminder_time', $date);
+                }
             });
         }
+
 
         if ($this->filterType) {
             $query->where('type', $this->filterType);
