@@ -66,7 +66,19 @@ class ModalForm extends Component
             'is_completed',
         ]);
     }
-
+    public function rules(){
+        return [
+            'title' => 'required|string|max:255',
+            'type' => 'required|in:medicine,consultation,lab test,therapy and sports',
+            'description' => 'nullable|string',
+            'reminder_time' => 'required|date',
+            'repeat_interval' => 'required|in:none,daily,weekly,monthly',
+        ];
+    }
+    public function updated($property)
+    {
+        $this->validateOnly($property);
+    }
     public function save()
     {
         $validated = $this->validate([

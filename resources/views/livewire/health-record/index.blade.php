@@ -16,7 +16,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
         {{-- Top bar --}}
         <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-6">
-            <x-input type="text" wire:model.live="search" icon :placeholder="__('Search')" />
+            <x-input type="text" wire:model.live="search" name="search" icon :placeholder="__('Search')" />
 
             <div class="flex gap-3">
                 <a href="{{ route('health-records.download') }}"
@@ -25,7 +25,6 @@
                 </a>
 
                 <x-button 
-                    {{-- x-data @click="$dispatch('open-modal', { id: 'add-health-data' })" --}}
                     wire:click="$dispatch('openHealthRecordForm')"
                     >
                     Add Health Data
@@ -57,7 +56,7 @@
         </div>
     </div>
 
-     {{-- Add Health Data Modal --}}
+    {{-- Add Health Data Modal --}}
     <x-modal wire:model="showModal" title="Add Health Data" maxWidth="md">
         <form wire:submit.prevent="submit" class="bg-white shadow p-6 md:p-8 w-full">
             <h2 class="text-xl md:text-2xl font-semibold text-primary text-center">
@@ -68,7 +67,7 @@
             </p>
 
             <x-label label="Type" for="healthTypeId" value="Health Type" />
-            <x-select id="healthTypeId" wire:model.live="healthTypeId" name="health_type_id" class="form-select w-full">
+            <x-select id="healthTypeId" wire:model.live="healthTypeId" name="healthTypeId" class="form-select w-full">
                 <option class="text-primary" value="">-- Select Type --</option>
                 @foreach($healthTypes as $type)
                     <option class="text-primary" value="{{ $type->id }}">{{ $type->name }} ({{ $type->unit }})</option>
@@ -81,19 +80,19 @@
             @error('recordedAt') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
 
             @if ($selectedHealthType)            
-                <x-label for="value" class="block font-semibold mb-1">{{$selectedHealthType && $selectedHealthType->value_type === 'string' ? 'Enter Value / description' : 'Enter Value'}} </x-label>
+                <x-label for="{{ $selectedHealthType->value_type === 'string' ? 'raw_value' : 'value'}}" class="block font-semibold mb-1">{{$selectedHealthType && $selectedHealthType->value_type === 'string' ? 'Enter Value / description' : 'Enter Value'}} </x-label>
                 @if ($selectedHealthType && $selectedHealthType->value_type === 'string')
-                    <x-textarea wire:model.live="raw_value" placeholder="Enter Description"></x-textarea>
+                    <x-textarea wire:model.live="raw_value" name="raw_value" placeholder="Enter Description"></x-textarea>
                     @error('raw_value') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                 @else
-                    <x-input type="text" wire:model.live="value" placeholder="Enter Value" />
+                    <x-input type="text" wire:model.live="value" name="value" placeholder="Enter Value" />
                     @error('value') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                 @endif
             @endif
 
 
             <x-label label="notes" for="notes" value="Notes" />
-            <x-textarea wire:model.live="notes" placeholder="Enter Notes"></x-textarea>
+            <x-textarea wire:model.live="notes" name="notes" placeholder="Enter Notes"></x-textarea>
 
 
              {{-- Actions --}}
@@ -104,9 +103,11 @@
                     Cancel
                 </x-button>
 
-                <x-button type="submit" wire:click="submit">
+                <x-loading-button type="submit">
                     Submit
-                </x-button>
+                </x-loading-button>
+
+
             </div>
         </form>
     </x-modal>

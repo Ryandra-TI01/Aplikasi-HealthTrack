@@ -114,7 +114,8 @@ class ByType extends Component
         $this->dispatch('healthDataType-updated');
     }
     
-     #[On('healthDataType-updated')]
+     #[On('healthDataType-updated')]    
+     #[On('healthdatatype-deleted')]
     public function refreshChart()
     {
         $this->showModal = false;

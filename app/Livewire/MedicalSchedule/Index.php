@@ -21,6 +21,7 @@ class Index extends Component
     #[On('openFilterModal')]
     public function showFilterModal()
     {
+        $this->resetFilter();
         $this->showFilterModal = true;
     }
     #[On('closeFilterModal')]
@@ -31,10 +32,11 @@ class Index extends Component
     public function resetFilter()
     {
         // reset filter
+        $this->search = '';
         $this->filterType = '';
         $this->filterCompleted = '';
-        $this->filterDateStart ;
-        $this->filterDateEnd ;
+        $this->filterDateStart= '';
+        $this->filterDateEnd = '';
 
     }
     public function applyFilter()

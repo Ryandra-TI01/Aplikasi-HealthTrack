@@ -20,7 +20,7 @@
             <p class="text-gray-600 mb-6 max-w-md mx-auto lg:mx-0" data-aos="fade-right" data-aos-delay="300">
                 Manage your medications, schedule and vitals, and connect with a supportive community – all in one trusted platform built with your health in mind.
             </p>
-            <x-button class="transition-all duration-300 hover:scale-105 hover:shadow-lg" data-aos="fade-right" data-aos-delay="400">
+            <x-button>
                 <a href="{{ route('register') }}">Get Started</a>
             </x-button>
 

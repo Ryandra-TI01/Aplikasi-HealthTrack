@@ -41,7 +41,7 @@
             </button>
 
             <!-- Title -->
-            <h2 class="text-lg font-semibold text-primary mb-2">Delete Feedback</h2>
+            <h2 class="text-lg font-semibold text-primary mb-2">Delete {{ $modelName }}</h2>
 
             <!-- Message -->
             <p class="text-gray-700 mb-6">Are you sure you want to permanently delete this {{ $modelName }}?</p>

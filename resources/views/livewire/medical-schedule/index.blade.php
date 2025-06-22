@@ -102,11 +102,30 @@
                             <x-input type="date" wire:model="filterDateEnd"/>
                         </div>
                     </div>
-    
+
                     <div class="flex justify-end mt-4 gap-2">
-                        <x-button wire:click="$dispatch('closeFilterModal')" variant="cancel">Cancel</x-button>
-                        <x-button wire:click="applyFilter">Apply</x-button>
+                        <x-button wire:click="$dispatch('closeFilterModal')" variant="cancel">
+                            Cancel
+                        </x-button>
+
+                        <x-button
+                            wire:click="applyFilter"
+                            wire:loading.attr="disabled"
+                            wire:target="applyFilter"
+                            class="relative flex items-center gap-2 justify-center"
+                        >
+                            <span wire:loading.remove wire:target="applyFilter">
+                                Apply
+                            </span>
+
+                            <div
+                                wire:loading
+                                wire:target="applyFilter"
+                                class="absolute right-3 w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"
+                            ></div>
+                        </x-button>
                     </div>
+
                 </div>
             </x-modal>
     

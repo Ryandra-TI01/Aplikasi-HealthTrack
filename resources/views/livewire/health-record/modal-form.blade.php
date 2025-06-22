@@ -7,24 +7,24 @@
                 Please enter your health data accurately for effective monitoring.
             </p>
         <div class="mb-4" wire:key="input-type-{{ $healthType?->id ?? 'default' }}">
-            <x-label for="value" class="block font-semibold mb-1">{{$healthType && $healthType->value_type === 'string' ? 'Masukkan Nilai / keterangan' : 'Masukkan Nilai'}} </x-label>
+            <x-label for="value" class="block font-semibold mb-1">{{$healthType && $healthType->value_type === 'string' ? 'Enter Value / description' : 'Enter Value'}} </x-label>
         
             @if ($healthType && $healthType->value_type === 'string')
-                <x-textarea wire:model="value" class="w-full border p-2 rounded" placeholder="Masukkan nilai..." rows="4" cols="20"></x-textarea>
+                <x-textarea wire:model.live="value" name="value" class="w-full border p-2 rounded" placeholder="Enter Description..." rows="4" cols="20"></x-textarea>
             @else
-                <x-input type="text" wire:model="value" class="w-full border p-2 rounded" placeholder="Contoh: 36.5"/>
+                <x-input type="text" wire:model.live="value" name="value" class="w-full border p-2 rounded" placeholder="Example: 36.5"/>
             @endif
         
             @error('value') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
         </div>
         <div class="mb-4">
             <x-label for="recordedAt">Tanggal Catatan</x-label>
-            <x-input type="datetime-local" wire:model="recordedAt" class="w-full border p-2 rounded"/>
+            <x-input type="datetime-local" name="recordedAt" wire:model="recordedAt" class="w-full border p-2 rounded"/>
             @error('recordedAt') <span class="text-red-500">{{ $message }}</span> @enderror
         </div>
         <div>
             <x-label for="notes" class="block text-sm font-medium">Catatan (opsional)</x-label>
-            <x-textarea wire:model="notes" rows="3" class="w-full rounded border-gray-300 shadow-sm"></x-textarea>
+            <x-textarea wire:model="notes" rows="3" name="notes" class="w-full rounded border-gray-300 shadow-sm"></x-textarea>
             @error('notes') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
         </div>
 
@@ -36,9 +36,10 @@
                 Cancel
             </x-button>
 
-            <x-button type="submit" wire:click="submit">
+            <x-loading-button type="submit">
                 Submit
-            </x-button>
+            </x-loading-button>
+
         </div>
     </form>
 </x-modal>

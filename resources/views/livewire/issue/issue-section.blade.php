@@ -8,8 +8,9 @@
                 placeholder="Search"
                 icon
                 class="md:w-64"
+                name="search"
             />
-            <x-select wire:model.live="sortBy">
+            <x-select wire:model.live="sortBy" name="sortBy">
                 <option value="latest">Sort by Latest</option>
                 <option value="oldest">Sort by Oldest</option>
             </x-select>
@@ -47,7 +48,16 @@
                         </td>
                         <td class="px-6 py-4">{{ $issue->created_at->diffForHumans() }}</td>
                         <td class="px-6 py-4">
-                            <x-button wire:click.stop="confirmDelete({{ $issue->id }})" variant="error">Delete</x-button>
+                            <button wire:click.stop="confirmDelete({{ $issue->id }})" variant="error">
+                                 <svg 
+                                    class="cursor-pointer text-error hover:text-error/50" 
+                                    xmlns="http://www.w3.org/2000/svg" 
+                                    width="24" 
+                                    height="24" 
+                                    viewBox="0 0 24 24">
+                                    <path fill="currentColor" d="M19 4h-3.5l-1-1h-5l-1 1H5v2h14M6 19a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7H6z"/>
+                                </svg>
+                            </button>
                         </td>
                     </tr>
                 @empty
@@ -81,19 +91,19 @@
             <form wire:submit.prevent="submit" class="space-y-4">
                 <div>
                     <x-label for="title" value="Title" />
-                    <x-input id="title" type="text" wire:model.live="title" />
+                    <x-input id="title" type="text" wire:model.live="title" name="title" />
                     @error('title') <span class="text-red-500">{{ $message }}</span> @enderror
                 </div>
 
                 <div>
                     <x-label for="description" value="Description" />
-                    <x-textarea id="description" wire:model.live="description" />
+                    <x-textarea id="description" wire:model.live="description" name="description" />
                     @error('description') <span class="text-red-500">{{ $message }}</span> @enderror
                 </div>
 
                 <div class="flex justify-end gap-2 pt-2">
                     <x-button variant="cancel" type="button" wire:click="closeModal">Cancel</x-button>
-                    <x-button variant="primary" type="submit">Submit</x-button>
+                    <x-loading-button variant="primary" type="submit">Submit</x-loading-button>
                 </div>
             </form>
         </div>

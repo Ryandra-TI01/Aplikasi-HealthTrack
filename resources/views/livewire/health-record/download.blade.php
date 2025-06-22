@@ -22,23 +22,25 @@
                     <x-label for="type" value="Select Data Type"></x-label>
                     <x-input wire:click="$dispatch('showTypeModal')"
                         id="type"
+                        name="type"
                         value="{{ count($selectedTypes) > 0 ? implode(', ', $healthTypes->whereIn('id', $selectedTypes)->pluck('name')->toArray()) : '-- Select Data Type --' }}"
                         >
                     </x-input>
+                    @error('selectedTypes') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                 </div>
 
                 {{-- Start Date --}}
                 <div>
-                    <x-label for="startDate">Starting Date</x-label>
-                    <x-input type="date" name="start_date" wire:model="startDate" value="{{ $startDate }}"/>
-                    @error('startDate') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                    <x-label for="start_date">Starting Date</x-label>
+                    <x-input type="date" name="start_date" wire:model="start_date" value="{{ $start_date }}"/>
+                    @error('start_date') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                 </div>
 
                 {{-- End Date --}}
                 <div>
-                    <x-label for="endDate" >End Date</x-label>
-                    <x-input type="date" name="end_date" wire:model="endDate" value="{{ $endDate }}"/>
-                    @error('endDate') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                    <x-label for="end_date" >End Date</x-label>
+                    <x-input type="date" name="end_date" wire:model="end_date" value="{{ $end_date }}"/>
+                    @error('end_date') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                 </div>
             </div>
 
@@ -57,25 +59,25 @@
 
                         @foreach ($healthTypes as $type)
                             <x-label for="{{ $type->id }}" class="flex items-center gap-2">
-                                <x-checkbox type="checkbox" name="types[]" id="{{$type->id}}" wire:model="selectedTypes" value="{{ $type->id }}"/>
+                                <x-checkbox type="checkbox" name="types[]" id="{{$type->id}}" wire:model.live="selectedTypes" value="{{ $type->id }}"/>
                                 {{ $type->name }}
                             </x-label>
                         @endforeach
                     </div>
 
                     <div class="flex justify-end mt-4 gap-2">
-                        <x-button wire:click="cancel" variant="cancel">Batal</x-button>
-                        <x-button wire:click="$set('showModal', false)">Simpan</x-button>
+                        <x-button wire:click="cancel" variant="cancel">Cancel</x-button>
+                        <x-button wire:click="close">Apply</x-button>
                     </div>
                 </div>
             </x-modal>
 
             {{-- Row 2: Buttons --}}
             <div class="flex justify-end gap-2">
-                <x-button type="button" wire:click="showData" wire:loading.attr="disabled"  variant="outline" class="flex items-center">
+                <x-button type="button" wire:click="showData" wire:target="showData" wire:loading.attr="disabled"  variant="outline" class="flex items-center" wire:target="showData">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"><path d="M3 13c3.6-8 14.4-8 18 0"/><path d="M12 17a3 3 0 1 1 0-6a3 3 0 0 1 0 6"/></g></svg>
-                        <span wire:loading.remove>Preview</span>
-                        <span wire:loading>Loading...</span>
+                        <span wire:loading.remove wire:target="showData" >Preview</span>
+                        <span wire:loading wire:target="showData">Loading...</span>
                 </x-button>
 
                 <x-button type="submit" class="flex items-center">
@@ -176,11 +178,6 @@
                                     <td class="px-6 py-4 whitespace-nowrap">{{ \Carbon\Carbon::parse($record->recorded_at)->format('h:i A') }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap">{{ $record->value ?? $record->raw_value }} {{ $type->unit }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap">{{ $record->notes ?? '-' }}</td>
-                                    {{-- <td class="px-6 py-4 whitespace-nowrap">
-                                        <button class="text-red-500 hover:text-red-700">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </td> --}}
                                 </tr>
                             @endforeach
                         </tbody>

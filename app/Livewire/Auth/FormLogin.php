@@ -9,14 +9,16 @@ use Livewire\Component;
 
 class FormLogin extends Component
 {
-    #[Validate('required|email')]
     public $email = '';
-
-    #[Validate('required')]
     public $password = '';
-
     public $remember = false;
 
+    public function rules(){
+        return [
+            'email' => 'required|email',
+            'password' => 'required',
+        ];
+    }
     public function updated($property)
     {
         $this->validateOnly($property);

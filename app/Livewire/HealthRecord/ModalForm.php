@@ -45,9 +45,14 @@ class ModalForm extends Component
     {
         return [
             'recordedAt' => 'required|date',
-            'value' => $this->healthType->value_type === 'decimal' ? 'required|numeric' : 'required|string|max:255',
+            'value' => $this->healthType->value_type === 'decimal' ? 'required|numeric|min:0|max:10000' : 'required|string|max:255',
             'notes' => 'nullable|string|max:255',
         ];
+    }
+
+    public function updated($property)
+    {
+        $this->validateOnly($property);
     }
     
     #[On('reset-form')]

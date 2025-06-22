@@ -1,13 +1,13 @@
 <form wire:submit.prevent="login">
     <div>
         <x-label for="email" value="{{ __('Email') }}" />
-        <x-input id="email" class="block mt-1 w-full" wire:model.live="email" autofocus autocomplete="username" placeholder="email@example.com" />
+        <x-input id="email" name="email" wire:model.live="email" autofocus autocomplete="username" placeholder="email@example.com" />
         @error('email') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
     </div>
 
     <div class="mt-4">
         <x-label for="password" value="{{ __('Password') }}" />
-        <x-input id="password" class="block mt-1 w-full" type="password" wire:model.live="password" autocomplete="current-password" />
+        <x-input id="password" name="password"  type="password" wire:model.live="password" autocomplete="current-password" />
         @error('password') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
     </div>
 
@@ -24,8 +24,8 @@
     </div>
 
     <div class="flex items-center justify-end mt-4">
-        <x-button type="submit" variant="primary" fullWidth="true">
-            {{ __('Log in') }}
-        </x-button>
+        <x-loading-button wire:click="login" fullWidth>
+            Submit
+        </x-loading-button>
     </div>
 </form>

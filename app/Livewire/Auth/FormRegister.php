@@ -10,18 +10,27 @@ use Livewire\Component;
 
 class FormRegister extends Component
 {
-    #[Validate('required|string|max:255')]
     public string $name = '';
-
-    #[Validate('required|email|unique:users,email')]
     public string $email = '';
-
-    #[Validate('required|min:5|same:passwordConfirmation')]
     public string $password = '';
-
-    public string $passwordConfirmation = '';
-    #[Validate('accepted')]
+    public string $password_confirmation = '';
     public bool $terms = false;
+
+    protected function rules()
+    {
+        return [
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:5|confirmed',
+            'password_confirmation' => 'required|min:5',
+            'terms' => 'accepted',
+        ];
+    }
+    public function updated($property)
+    {
+        $this->validateOnly($property);
+    }
+
 
     public function register()
     {

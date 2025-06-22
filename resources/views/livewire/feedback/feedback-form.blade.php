@@ -43,9 +43,9 @@
                     Cancel
                 </x-button>
 
-                <x-button type="submit">
+                <x-loading-button type="submit">
                     {{ $isEdit ? 'Update Feedback' : 'Send Feedback' }}
-                </x-button>
+                </x-loading-button>
             </div>
         </form>
     </x-modal>

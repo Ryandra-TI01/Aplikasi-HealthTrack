@@ -11,8 +11,8 @@ use Livewire\Component;
 
 class Download extends Component
 {
-    public $startDate;
-    public $endDate;
+    public $start_date;
+    public $end_date;
     public $selectedTypes = [];
     public $healthTypes;
     public $results = [];
@@ -23,22 +23,29 @@ class Download extends Component
     public function mount()
     {
         $this->healthTypes = HealthType::select('id', 'name')->get();
-        $this->endDate = Carbon::now()->format('Y-m-d');
+        $this->end_date = Carbon::now()->format('Y-m-d');
+    }
+    public function rules(){
+        return [
+            'start_date' => 'required|date',
+            'end_date' => 'required|date|after_or_equal:start_date',
+            'selectedTypes' => 'required|array|min:1',
+        ];
+    }
+    public function updated($property)
+    {
+        $this->validateOnly($property);
     }
     public function showData()
     {
-        $this->validate([
-            'startDate' => 'required|date',
-            'endDate' => 'required|date|after_or_equal:startDate',
-            'selectedTypes' => 'required|array|min:1',
-        ]);
+        $this->validate();
 
         $this->results = [];
 
         foreach ($this->selectedTypes as $typeId) {
             $records = HealthRecord::where('user_id', auth()->id())
                 ->where('health_type_id', $typeId)
-                ->whereBetween('recorded_at', [$this->startDate, $this->endDate])
+                ->whereBetween('recorded_at', [$this->start_date, $this->end_date])
                 ->orderBy('recorded_at')
                 ->get();
 
@@ -61,6 +68,10 @@ class Download extends Component
     public function open()
     {
         $this->showModal = true;
+    }
+    #[On('closeTypeModal')]
+    public function close(){
+        $this->showModal = false;
     }
      public function cancel()
     {
