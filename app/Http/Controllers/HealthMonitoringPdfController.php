@@ -6,7 +6,6 @@ use App\Models\HealthRecord;
 use App\Models\HealthType;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http; // Tambahkan di atas
 
 class HealthMonitoringPdfController extends Controller
 {
@@ -64,15 +63,8 @@ public function export(Request $request)
             ];
 
             $chartUrl = 'https://quickchart.io/chart?width=600&height=300&c=' . urlencode(json_encode($chartData));
-
-            $response = Http::timeout(10)->get($chartUrl); // Timeout 10 detik
-
-            if ($response->successful()) {
-                $chartBase64 = 'data:image/png;base64,' . base64_encode($response->body());
-            } else {
-                $chartBase64 = null; // atau placeholder gambar jika gagal
-            }
-
+            $imageContent = file_get_contents($chartUrl);
+            $chartBase64 = 'data:image/png;base64,' . base64_encode($imageContent);
         }
 
         $data[] = [
